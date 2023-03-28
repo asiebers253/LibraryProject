@@ -9,6 +9,8 @@ private:
 public: 
 	Menus();
 	void startMenu();
+	void loginMenu();
+	void createUserMenu();
 	void guestMenu();
 	void userMenu();
 	void adminMenu();
