@@ -14,5 +14,8 @@ public:
 	void guestMenu();
 	void userMenu();
 	void adminMenu();
+	void searchMenu();
+	void bookInfoMenu();
+	void userInfoMenu();
 };
 
