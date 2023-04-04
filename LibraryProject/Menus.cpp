@@ -4,9 +4,6 @@ using namespace std;
 
 Menus::Menus() {}
 
-//change it so it prints options every time
-//infinite while loop
-
 void Menus::startMenu() {
 	cout << " Welcome to the Cofrin Library!" << endl;
 	cout << " (Type in what option you would like to select)" << endl;
