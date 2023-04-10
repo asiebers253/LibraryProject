@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <cstring>
-#include <vector>
+#include "UserLinkedList.h"
 #include "User.h"
 using namespace std;
 #ifndef USERS_H
@@ -11,21 +11,19 @@ using namespace std;
 class Users
 {
 private:
-	vector<User> users;
+	UserLinkedList users;
 public:
 	Users();
-	Users(vector<User> users);
+	Users(UserLinkedList users);
 	Users(Users& users);
 	void addUser(User u);
-	vector<User> searchByName(); //all of the ones with vectors will be replaced by linked lists later
-	vector<User> searchByAddress();
-	vector<User> searchByEmail();
-	vector<User> searchByPhoneNumber();
-	vector<User> searchByKeyword();
-	void printSearchResults();
+	UserLinkedList searchByName(string n); //all of the ones with vectors will be replaced by linked lists later
+	UserLinkedList searchByAddress(string a);
+	UserLinkedList searchByEmail(string e);
+	UserLinkedList searchByPhoneNumber(string pn);
+	UserLinkedList searchByKeyword(string n);
 	void printUserInfo(User u);
-	void printAllUsers(); //will be replaced later
-	void registerUser();
+	//void registerUser();
 	
 };
 

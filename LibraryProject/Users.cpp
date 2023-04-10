@@ -1,18 +1,18 @@
 #include "Users.h"
 #include <iostream>
 #include <cstring>
-#include <vector>
+#include "UserLinkedList.h"
 #include "User.h"
 using namespace std;
 
 //Default Constructor
 Users::Users() {
-	vector<User> users;
+	UserLinkedList users;
 	this->users = users;
 }
 
 //Parametric Constructor
-Users::Users(vector<User> users) {
+Users::Users(UserLinkedList users) {
 	this->users = users;
 }
 
@@ -23,40 +23,53 @@ Users::Users(Users& u) {
 
 //this will change when using linkedlists instead of vectors
 void Users::addUser(User u) {
-	users.push_back(u);
+	users.addNode(u);
 }
 
 //search functions and printing search results will change after
 //I have a better understanding of how linkedlist works in c++
 
-vector<User> Users::searchByName() {
-	vector<User> sortedList;
-	for (int i = 0; i < users.size(); i++) {
-		for (int j = i; j < users.size(); j++) {
-
-		}
-	}
-	return sortedList;
+UserLinkedList Users::searchByName(string n) {
+	return users.searchByName(n);
 }
 
-void Users::printSearchResults(/*linked list of results*/) {
+UserLinkedList Users::searchByAddress(string a) {
+	return users.searchByAddress(a);
+}
+
+UserLinkedList Users::searchByEmail(string e) {
+	return users.searchByEmail(e);
+}
+
+UserLinkedList Users::searchByPhoneNumber(string pn) {
+	return users.searchByPhoneNumber(pn);
+}
+
+UserLinkedList Users::searchByKeyword(string n) {
+	return users.searchByKeyword(n);
+}
+
+
+
+//void Users::printSearchResults(/*linked list of results*/) {
 	//for each value in the list, print the value
 	//cout << "[" << i << "] " << (list.at(i)).getFirstName() << " " << (list.at(i)).getLastName();
-}
+//}
 
 //this is just to make sure the code is working and will be replaced
 //by search related functions later
-void Users::printAllUsers() {
+/*void Users::printAllUsers() {
 	cout << endl;
 	for (int i = 0; i < users.size(); i++) {
 		users.at(i).printUserInfo();
 	}
-}
+}*/
 
 void Users::printUserInfo(User u) {
 	u.printUserInfo();
 }
 
+/*
 void Users::registerUser() {
 	User u;
 	string str;
@@ -115,4 +128,4 @@ void Users::registerUser() {
 
 	//check in instruction id is admin to determine if user should be an admin
 }
-
+*/
