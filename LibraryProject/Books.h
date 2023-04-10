@@ -16,7 +16,6 @@ private:
 	string publisherAddress;
 	double price;
 public:
-	string GetAuthor() const {
 		return author;
 	}
 	void SetAuthor(string a) {
@@ -74,3 +73,4 @@ public:
 };
 
 #endif books_h
+
