@@ -16,6 +16,7 @@ private:
 	string publisherAddress;
 	double price;
 public:
+	string getAuthor() {
 		return author;
 	}
 	void SetAuthor(string a) {
