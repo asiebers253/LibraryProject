@@ -5,7 +5,7 @@
 #include <string>
 using namespace std;
 
-class books {
+class Books {
 private:
 	string author;
 	string title;
@@ -16,62 +16,47 @@ private:
 	string publisherAddress;
 	double price;
 public:
-	string getAuthor() {
-		return author;
-	}
-	void SetAuthor(string a) {
-		author = a;
-	}
 
-	string GetTitle() const {
-		return title;
-	}
-	void SetTitle(string t) {
-		title = t;
-	}
+	Books();
 
-	string GetPupblisher() const {
-		return publisher;
-	}
-	void SetPublisher(string p) {
-		publisher = p;
-	}
+	Books(string author, string title, string publisher, int edition, int ISBN, string publisherEmail, string publisherAddress, double price);
 
-	string GetPupblisherEmail() const {
-		return publisherEmail;
-	}
-	void SetPublisherEmail(string pe) {
-		publisher = pe;
-	}
+	~Books();
 
-	string GetPupblisherAddress() const {
-		return publisherAddress;
-	}
-	void SetPublisherAddress(string pa) {
-		publisherAddress = pa;
-	}
+	string GetAuthor() {}
 
-	int GetISBN() const {
-		return ISBN;
-	}
-	void SetISBN(int i) {
-		ISBN = i;
-	}
+	void SetAuthor(string a) {}
 
-	int GetEdition() const {
-		return edition;
-	}
-	void SetEdition(int e) {
-		edition = e;
-	}
+	string GetTitle() {}
 
-	double GetPrice() const {
-		return price;
-	}
-	void SetPrice(double pr) {
-		price = pr;
-	}
+	void SetTitle(string t) {}
+
+	string GetPublisher() {}
+
+	void SetPublisher(string p) {}
+
+	string GetPublisherEmail() {}
+
+	void SetPublisherEmail(string pe) {}
+
+	string GetPublisherAddress() {}
+
+	void SetPublisherAddress(string pa) {}
+
+	int GetISBN() {}
+
+	void SetISBN(int i) {}
+
+	int GetEdition() {}
+
+	void SetEdition(int e) {}
+
+	double GetPrice() {}
+
+	void SetPrice(double pr) {}
+
+
 };
 
-#endif books_h
+#endif
 
