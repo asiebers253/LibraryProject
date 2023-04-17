@@ -22,6 +22,66 @@ void UserLinkedList::addNode(User u) {
 	}
 }
 
+void UserLinkedList::removeNode(User u) {
+	if (head == NULL) {
+		cout << "No users to remove. " << endl;
+	} else {
+		UserNode* prevNode = head;
+		UserNode* currNode = head->next;
+		while (currNode != NULL) {
+			User currUser = currNode->data;
+			if (currUser.isEqual(u)) {
+				prevNode->next = currNode->next;
+				break;
+			}
+			prevNode = currNode;
+			currNode = currNode->next;
+		}
+	}
+}
+
+User UserLinkedList::getNodeAt(int index) {
+	if (head == NULL) {
+		cout << "There are no users." << endl;
+		User u;
+		return u;
+	}
+	else {
+		UserNode* temp = head;
+		int counter = 1;
+		while (temp != NULL) {
+			User tempU = temp->data;
+			if (counter == index) {
+				return tempU;
+			}
+			counter++;
+			temp = temp->next;
+		}
+	}
+}
+
+UserLinkedList UserLinkedList::printAllUsers() {
+	cout << " All Users in the Library System" << endl;
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	
+	if (head == NULL) {
+			cout << "There are no users." << endl;
+	} else {
+		UserNode* temp = head;
+		int counter = 1;
+		while (temp != NULL) {
+			User tempU = temp->data;
+			string fn = tempU.getFirstName();
+			string ln = tempU.getLastName();
+			cout << " [" << counter << "] " << tempU.getFirstName() << " " << tempU.getLastName() << endl;
+			counter++;
+			temp = temp->next;
+		}
+		cout << endl;
+	}
+}
+
+//modify to list matches to first or last name first, then the other?
 UserLinkedList UserLinkedList::searchByName(string n) {
 	UserLinkedList results;
 	searchBy(n);
@@ -32,7 +92,14 @@ UserLinkedList UserLinkedList::searchByName(string n) {
 		int counter = 0;
 		while (temp != NULL) {
 			tempU = temp->data;
-			if (tempU.getFirstName() == n || tempU.getLastName() == n) {
+
+			//get the user's first and last name
+			string fn = tempU.getFirstName();
+			string ln = tempU.getLastName();
+
+			//check if the given string is in either the first or last name
+
+			if (fn.find(n) != string::npos|| ln.find(n) != string::npos) {
 				counter++;
 				cout << " [" << counter << "] " << tempU.getFirstName() << " " << tempU.getLastName() << endl;
 				results.addNode(tempU);
@@ -63,7 +130,10 @@ UserLinkedList UserLinkedList::searchByEmail(string e) {
 		int counter = 0;
 		while (temp != NULL) {
 			tempU = temp->data;
-			if (tempU.getEmail() == e) {
+
+			string email = tempU.getEmail();
+
+			if (email.find(e) != string::npos) {
 				counter++;
 				cout << " [" << counter << "] " << tempU.getFirstName() << " " << tempU.getLastName();
 				cout << " (" << tempU.getEmail() << ")" << endl;
@@ -89,7 +159,10 @@ UserLinkedList UserLinkedList::searchByAddress(string a) {
 		int counter = 0;
 		while (temp != NULL) {
 			tempU = temp->data;
-			if (tempU.getAddress() == a) {
+
+			string address = tempU.getAddress();
+
+			if (address.find(a) != string::npos) {
 				counter++;
 				cout << " [" << counter << "] " << tempU.getFirstName() << " " << tempU.getLastName();
 				cout << " (" << tempU.getAddress() << ")" << endl;
@@ -115,7 +188,10 @@ UserLinkedList UserLinkedList::searchByPhoneNumber(string pn) {
 		int counter = 0;
 		while (temp != NULL) {
 			tempU = temp->data;
-			if (tempU.getPhoneNumber() == pn) {
+
+			string phoneNumber = tempU.getPhoneNumber();
+
+			if (phoneNumber.find(pn) != string::npos) {
 				counter++;
 				cout << " [" << counter << "] " << tempU.getFirstName() << " " << tempU.getLastName();
 				cout << " (" <<  tempU.getPhoneNumber() << ")" << endl;

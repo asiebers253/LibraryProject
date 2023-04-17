@@ -1,10 +1,13 @@
 #include "Menus.h"
 #include <iostream>
+#include <string.h>
 using namespace std;
 
 Menus::Menus() {}
 
 void Menus::startMenu() {
+	int option;
+
 	cout << " Welcome to the Cofrin Library!" << endl;
 	cout << " (Type in what option you would like to select)" << endl;
 	cout << " [1] Login" << endl;
@@ -14,26 +17,33 @@ void Menus::startMenu() {
 
 	cin >> option;
 
-	while (option != 1 && option != 2 && option != 3 && option != -1) {
-		cout << endl;
-		cout << " Please choose one of the avaliable options.";
-		cout << endl;
+	while (option != -1) {
+
+		if (option == 1) {
+			loginMenu();
+		}
+		else if (option == 2) {
+			createUserMenu();
+		}
+		else if (option == 3) {
+			guestMenu();
+		}
+		else {
+			cout << "Please pick one of the options." << endl;
+		}
+
+		cout << " Welcome to the Cofrin Library!" << endl;
+		cout << " (Type in what option you would like to select)" << endl;
+		cout << " [1] Login" << endl;
+		cout << " [2] Create Account" << endl;
+		cout << " [3] Guest Login" << endl;
+		cout << " [-1] Exit" << endl;
+
 		cin >> option;
 	}
-	
-	if (option == 1) {
-		loginMenu();
-	} else if (option == 2) {
-		createUserMenu();
-	}
-	else if (option == 3) {
-		guestMenu();
-	}
-	else if (option == -1) {
-		cout << " Thank you for visiting the Cofrin Library!";
-		cout << endl;
-		exit(0);
-	}
+
+	cout << "Thank you for visiting the Cofrin Library!" << endl;
+
 }
 
 void Menus::loginMenu() {
@@ -42,7 +52,17 @@ void Menus::loginMenu() {
 }
 
 void Menus::createUserMenu() {
-	cout << " Create user here!";
+	string userName;
+	string password;
+
+	cout << "Enter New Username: ";
+	cin >> userName;
+	cout << "Enter New Password: ";
+	cin >> password;
+
+	//TODO: Add username and password to proper storage
+
+	cout << "Account Created!" << endl;
 }
 
 void Menus::guestMenu() {

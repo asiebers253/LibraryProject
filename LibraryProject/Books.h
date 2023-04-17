@@ -23,40 +23,38 @@ public:
 
 	~Books();
 
-	string GetAuthor() {}
+	string GetAuthor();
 
-	void SetAuthor(string a) {}
+	void SetAuthor(string a);
 
-	string GetTitle() {}
+	string GetTitle();
 
-	void SetTitle(string t) {}
+	void SetTitle(string t);
 
-	string GetPublisher() {}
+	string GetPublisher();
 
-	void SetPublisher(string p) {}
+	void SetPublisher(string p);
 
-	string GetPublisherEmail() {}
+	string GetPublisherEmail();
 
-	void SetPublisherEmail(string pe) {}
+	void SetPublisherEmail(string pe);
 
-	string GetPublisherAddress() {}
+	string GetPublisherAddress();
 
-	void SetPublisherAddress(string pa) {}
+	void SetPublisherAddress(string pa);
 
-	int GetISBN() {}
+	int GetISBN();
 
-	void SetISBN(int i) {}
+	void SetISBN(int i);
 
-	int GetEdition() {}
+	int GetEdition();
 
-	void SetEdition(int e) {}
+	void SetEdition(int e);
 
-	double GetPrice() {}
+	double GetPrice();
 
-	void SetPrice(double pr) {}
-
+	void SetPrice(double pr);
 
 };
 
 #endif
-

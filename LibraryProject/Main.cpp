@@ -2,6 +2,7 @@
 #include "Menus.h"
 #include "User.h"
 #include "Users.h"
+#include "UserFile.h"
 using namespace std;
 
 void testMenu() {
@@ -19,7 +20,21 @@ void userSearchTest() {
 	users.addUser(Abby);
 	users.addUser(Brent);
 	users.addUser(Rebecca);
+	
+	UserLinkedList results = users.searchByName("Davis");
+	User u = results.getNodeAt(2);
+	cout << endl;
+	u.printUserInfo();
+	//cout << endl;
+	//users.printAllUsers();
+	//users.removeUser(Brent);
+	//users.searchByName("Davis");
+	//cout << endl;
+	//users.printAllUsers();
+	//User u = users.getUserAt(2);
+	
 
+	/*
 	users.searchByName("Abby");
 	cout << endl;
 	users.searchByAddress("1093 Hillside Drive");
@@ -29,10 +44,21 @@ void userSearchTest() {
 	users.searchByPhoneNumber("920-827-0293");
 	cout << endl;
 	users.searchByKeyword("Davis");
+	*/
 }
 
 int main() {
+	testMenu();
 	//testMenu();
+	//userSearchTest();
+	//Users users;
+	//users.registerUser();
+
+	//testMenu();
+
 	userSearchTest();
+	
+	//users.registerUser("Rebecca", "Davis", "1093 Hillside Drive", "920-827-0293", "davir22@uwgb.edu", 59023485);
+	//users.searchByName("Reb");
 }
 	

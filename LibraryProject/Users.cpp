@@ -3,12 +3,13 @@
 #include <cstring>
 #include "UserLinkedList.h"
 #include "User.h"
+#include "UserFile.h"
 using namespace std;
 
 //Default Constructor
 Users::Users() {
-	UserLinkedList users;
-	this->users = users;
+	UserFile f;
+	users = f.readFile();
 }
 
 //Parametric Constructor
@@ -21,111 +22,107 @@ Users::Users(Users& u) {
 	this->users = u.users;
 }
 
-//this will change when using linkedlists instead of vectors
+//Adds a user to the linked list
 void Users::addUser(User u) {
 	users.addNode(u);
 }
 
-//search functions and printing search results will change after
-//I have a better understanding of how linkedlist works in c++
-
+//Accesses the searchByName function in the userLinkedList class
 UserLinkedList Users::searchByName(string n) {
 	return users.searchByName(n);
 }
 
+//Accesses the searchByAddress function in the userLinkedList class
 UserLinkedList Users::searchByAddress(string a) {
 	return users.searchByAddress(a);
 }
 
+//Accesses the searchByEmail function in the userLinkedList class
 UserLinkedList Users::searchByEmail(string e) {
 	return users.searchByEmail(e);
 }
 
+//Accesses the searchByPhoneNumber function in the userLinkedList class
 UserLinkedList Users::searchByPhoneNumber(string pn) {
 	return users.searchByPhoneNumber(pn);
 }
 
+//Accesses the searchByKeyword function in the userLinkedList class
 UserLinkedList Users::searchByKeyword(string n) {
 	return users.searchByKeyword(n);
 }
 
+//Get user at a specific position in a userLinkedList
+User Users::getUserAt(int index) {
+	return users.getNodeAt(index);
+}
+
+void Users::removeUser(User u) {
+	users.removeNode(u);
+}
 
 
-//void Users::printSearchResults(/*linked list of results*/) {
-	//for each value in the list, print the value
-	//cout << "[" << i << "] " << (list.at(i)).getFirstName() << " " << (list.at(i)).getLastName();
-//}
-
-//this is just to make sure the code is working and will be replaced
-//by search related functions later
-/*void Users::printAllUsers() {
-	cout << endl;
-	for (int i = 0; i < users.size(); i++) {
-		users.at(i).printUserInfo();
-	}
-}*/
-
+//Accesses the printUserInfo function in the user class
 void Users::printUserInfo(User u) {
 	u.printUserInfo();
 }
 
-/*
-void Users::registerUser() {
-	User u;
-	string str;
-	int i;
-	bool b;
-	cout << endl;
-
-	cout << "What is your first name? ";
-	cin >> str;
-	u.setFirstName(str);
-	cout << endl;
-
-	cout << "What is your last name? ";
-	cin >> str;
-	u.setLastName(str);
-	cout << endl;
-
-	cout << "What is your address? ";
-	cin >> str;
-	u.setAddress(str);
-	cout << endl;
-
-	cout << "What is your phone number? ";
-	cin >> str;
-	u.setPhoneNumber(str);
-	cout << endl;
-
-	cout << "What is your email? ";
-	cin >> str;
-	u.setEmail(str);
-	cout << endl;
-
-	cout << "What is your instruction ID?";
-	cin >> i;
-	//if valid, set instruction id
-	//this also determines if the user is an admin
-
-	//scan books to see if this user has donated to the library?
-
-
-	//add something to create a password
-
-	srand(time(0));
-	int id = 843700000000;
-	int idR = rand();
-	idR = (idR % 100000) * 100;
-	id += idR;
-	u.setLibraryID(id);
-
-	//randomness for the library id is currently not working
-
-	cout << "Your registration is complete!" << endl;
-
-	cout << "Your Library ID is " << u.getLibraryID() << endl;
-	cout << "Use this along with your password to log onto the Cofrin Library system." << endl;
-
-	//check in instruction id is admin to determine if user should be an admin
+void Users::printAllUsers() {
+	users.printAllUsers();
 }
-*/
+
+//Used to register new users in our library system
+ void Users::registerUser(string fn, string ln, string a, string pn, string e, string p, int instID) {
+	
+	User u;
+	u.setFirstName(fn);
+	u.setLastName(ln);
+	u.setAddress(a);
+	u.setPhoneNumber(pn);
+	u.setPassword(p);
+	u.setInstructionID(instID);
+	u.setIsGuest(false);
+
+	//Ask teacher if we need to have a password
+
+	//instID should have 8 numbers
+	//having 5 in front means their id is a student id
+	//having 6 in front means they are are an admin
+
+	int val = instID / 60000000;
+
+	if (val == 1) {
+		u.setIsAdmin(true);
+	}
+
+	//Creates a library ID (which is 8 numbers long)
+	
+	//add something to check if a particular id was used before
+	//u.setLibraryID(createLibraryID());
+
+	//printing this out for testing purposes
+	cout << u.getLibraryID() << endl;
+
+	//check if donor by going through all of the books?
+	//This function assumes you can't borrow books without having an account
+
+	addUser(u);
+}
+
+ //ASK GROUP IF IT SHOULD BE RANDOM OR IF IT SHOULD COUNT BASED ON THE USERS
+ //create global counter for new libraryID
+ // NOT RANDOM
+ /*
+ int Users::createLibraryID() {
+	 srand(time(0));
+	 int upperBound = 50000000;
+	 int lowerBound = 40000000;
+	 int libraryID = ((rand() % (upperBound - lowerBound + 1)) + lowerBound);
+	
+	 
+
+
+	 if (libraryID < upperBound && libraryID > lowerBound) {
+		 return true; //Library ID is valid
+	 }*/
+ 

@@ -21,6 +21,7 @@ private:
 	bool isAdmin;
 	bool isDonor;
 	//vector<Book> borrowedBooks;
+	//use vector for borrowed books
 public:
 	User();							//Default Constructor
 	User(string fn, string ln, string a, string pN, string e, string p, int iID, int lID, bool authorized, bool donor);	//Parametric Constructor
@@ -48,5 +49,7 @@ public:
 	bool getIsDonor() const;
 	void setIsDonor(bool d);
 	void printUserInfo();
+	bool isEqual(User u);
+	bool validLogin(int, string);
 };
 

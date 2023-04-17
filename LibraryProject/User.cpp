@@ -98,4 +98,28 @@ void User::printUserInfo() {
 	cout << endl;
 }
 
+//will modify when borrowed books is figured out
+//check if a user is equal to another user
+bool User::isEqual(User u) {
+	bool sN = false, sA = false, sPN = false, sE = false, sP = false, sIID = false, sLID = false, sPER = false, sD = false;  //add bool sameBooksBorrowed
+
+	if (firstName == u.getFirstName() && lastName == u.getLastName()) { sN = true; }
+	if (address == u.getAddress()) { sA = true; }
+	if (email == u.getEmail()) { sE = true; }
+	if (phoneNumber == u.getPhoneNumber()) { sPN = true; }
+	if (password == u.getPassword()) { sP = true; }
+	if (instructionID == u.getInstructionID()) { sIID = true; }
+	if (libraryID == u.getLibraryID()) { sLID = true; }
+	if (u.getIsGuest() == false && isAdmin == u.getIsAdmin()) { sPER = true; }
+	if (isDonor == u.getIsDonor()) { sD = true; }
+
+	if (sN && sA && sPN && sE && sP && sIID && sLID && sPER && sD) { return true; } else { return false; }
+}
+
+bool User::validLogin(int id, string pwd) {
+	if (libraryID == id && password == pwd) {
+		return true;
+	}
+	return false;
+}
 

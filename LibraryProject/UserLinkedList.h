@@ -16,6 +16,9 @@ public:
 	UserLinkedList() { head = NULL; }
 	~UserLinkedList() {}
 	void addNode(User u);
+	void removeNode(User u);
+	User getNodeAt(int index);
+	UserLinkedList printAllUsers();
 	UserLinkedList searchByName(string n);
 	UserLinkedList searchByAddress(string a);
 	UserLinkedList searchByEmail(string e);
