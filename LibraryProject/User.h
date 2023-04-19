@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <cstring>
+#include <vector>
+#include "Books.h"
 using namespace std;
 #ifndef USER_H
 #define USER_H
@@ -20,12 +22,23 @@ private:
 	bool isGuest;
 	bool isAdmin;
 	bool isDonor;
-	//vector<Book> borrowedBooks;
-	//use vector for borrowed books
+	vector<Books> borrowedBooks;
+	
+
 public:
 	User();							//Default Constructor
-	User(string fn, string ln, string a, string pN, string e, string p, int iID, int lID, bool authorized, bool donor);	//Parametric Constructor
+	User(string fn, string ln, string a, string pN, string e, string p, int iID, int lID, bool donor);	//Parametric Constructor
 	User(const User& u);			//Copy Constructor
+
+	//Other Functions
+	void printUserInfo();
+	bool isEqual(User u);
+	bool isValidLogin(string pwd); 
+		bool isThereBorrowedBooks();
+		void borrowBook(Books b);
+		string test();
+
+	//Getters and Setters
 	string getFirstName() const;
 	void setFirstName(string fn);
 	string getLastName() const;
@@ -48,8 +61,8 @@ public:
 	void setIsAdmin(bool admin);
 	bool getIsDonor() const;
 	void setIsDonor(bool d);
-	void printUserInfo();
-	bool isEqual(User u);
-	bool validLogin(int, string);
+	vector<Books> getBorrowedBooks();
+	void setBorrowedBooks(vector<Books> books);
+	
 };
 

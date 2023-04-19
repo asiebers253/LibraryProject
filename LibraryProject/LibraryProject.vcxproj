@@ -133,7 +133,6 @@
     <ClCompile Include="User.cpp" />
     <ClCompile Include="UserFile.cpp" />
     <ClCompile Include="UserLinkedList.cpp" />
-    <ClCompile Include="Users.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Books.h" />
@@ -142,7 +141,6 @@
     <ClInclude Include="UserFile.h" />
     <ClInclude Include="UserLinkedList.h" />
     <ClInclude Include="UserNode.h" />
-    <ClInclude Include="Users.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -15,13 +15,28 @@ private:
 public:
 	UserLinkedList() { head = NULL; }
 	~UserLinkedList() {}
-	void addNode(User u);
-	void removeNode(User u);
-	User getNodeAt(int index);
-	UserLinkedList printAllUsers();
+
+	//Finding and Modifying Users
+	void registerUser(string, string, string, string, string, string, int);
+	void addUser(User u);
+	void removeUser(User u);
+	User getUserAt(int index);
+
+	//Print functions
+	void printUserInfoAt(int index);
+	void printAllUsers();
+
+	//Search functions
 	UserLinkedList searchByName(string n);
 	UserLinkedList searchByAddress(string a);
 	UserLinkedList searchByEmail(string e);
 	UserLinkedList searchByPhoneNumber(string pn);
 	UserLinkedList searchByKeyword(string key);
+
+	//Other
+	bool isValidLogin(int, string);
+	int generateLibraryID();
+	bool isLibraryIDUsed(int);
+	UserNode* getHead() { return head;}
+	void test();
 };

@@ -1,113 +1,290 @@
 #include "UserFile.h"
 #include "UserLinkedList.h"
-#include "Users.h"
+#include <sstream>
 #include <fstream>
 #include <iostream>
 #include <string>
+#include "Books.h"
+#include <vector>
 using namespace std;
 #pragma warning(disable : 4996) //lets strtok be used
 
-//Ask teacher for advice on this...
+//file of ids to connect the list of borrowed books to the user
 
-UserLinkedList UserFile::readFile() {
+//Assumes that all books have been loaded
+//might change to ifstream?
+//works as expected
+UserLinkedList UserFile::readUserFile() {
+	fstream fs;
 	UserLinkedList users;
-	/*
 	User u;
 	u.setIsGuest(false);
-	ifstream f;
-	string str;
-	string info;
+	string userInfo;
+	int num;
 	int counter = 1;
-	char* c = new char;
-	const char s[2] = ",";
+	int pos;
+	int prevPos;
 
-	f.open("ListOfUsers.txt");
-	if (!f.is_open()) {
-		cout << "Could not open ListOfUsers.txt" << endl;
+	fs.open("ListOfUsers.txt");
+	if (!fs.is_open()) {
+		cout << "ERROR - could not open ListOfUsers.txt file" << endl;
 		return users;
-	} 
+	}
 
-	int numInfo;
+	//ListOfUsers has the following format for each line
+	//firstName, lastName, address, phoneNumber, email, password, instructionID, libraryID, isDonor
 
-	//ASK TEACHER ABOUT READING STUFF IN
+	while (!fs.eof()) {
+		getline(fs, userInfo);
+		if (userInfo != "End of File") {
+			pos = userInfo.find(",");
+			string fn = userInfo.substr(0, pos);
+			if (fn != "") {
+			u.setFirstName(fn);
+			
 
-	while (!f.eof()) {
-		//get user information from the file
-		getline(f, str);
-		strcpy(c, str.c_str());
-		
-		char* sPtr = strtok(c, s);
-		//cout << c;
-		//put that user information into a user object
-		//sPtr = strtok(c, s);
-		//cout << sPtr;
-		while (sPtr != NULL) {
-			//info = sPtr;
-			numInfo = atoi(sPtr);
-			cout << numInfo << endl;
-			/*
-			//cout << sPtr;
-			switch (counter) {
-			case 1:
-				u.setFirstName(info);
-				break;
-			case 2:
-				u.setLastName(info);
-				break;
-			case 3:
-				u.setAddress(info);
-				break;
-			case 4:
-				u.setEmail(info);
-				break;
-			case 5:
-				u.setPhoneNumber(info);
-				break;
-			case 6:
-				u.setInstructionID(numInfo);
-				cout << u.getInstructionID();
-				break;
-			case 7:
-				u.setLibraryID(numInfo);
-				break;
-			case 8:
-				if (info == "yes") {
-					u.setIsAdmin(true);
+			while (counter <= 9) {
+				//Get the info
+				counter++;
+				prevPos = pos;
+				pos = userInfo.find(",", prevPos + 1);
+				string info = userInfo.substr(prevPos + 2, pos - (prevPos + 2));
+
+				//If needed, change the info from a string to an int
+				if (counter == 7 || counter == 8) {
+					stringstream ss;
+					ss << info;
+					ss >> num;
 				}
-				break;
-			case 9:
-				if (info == "yes") {
-					u.setIsDonor(true);
+				
+				//Add the information to the user object
+				if (counter == 2) {
+					u.setLastName(info);
 				}
-				break;
-			//add another case for borrowed books?
+				else if (counter == 3) {
+					u.setAddress(info);
+				}
+				else if (counter == 4) {
+					u.setPhoneNumber(info);
+				}
+				else if (counter == 5) {
+					u.setEmail(info);
+				}
+				else if (counter == 6) {
+					u.setPassword(info);
+				}
+				else if (counter == 7) {
+					u.setInstructionID(num);
+					if ((num / 60000000) == 1) {
+						u.setIsAdmin(true);
+					}
+				}
+				else if (counter == 8) {
+					u.setLibraryID(num);
+				}
+				else {
+					if (info == "Yes" || info == "yes") {
+						u.setIsDonor(true);
+					}
+				}
+				
 			}
-			counter++;
-			sPtr = strtok(NULL, s);
+			u.printUserInfo(); //for testing purposes
+			users.addUser(u);
+			}
 		}
+		
+	}
 
-		//add the user object to the linked list
-		//u.printUserInfo();
-		//users.addUser(u);
-	}*/
+	fs.close();
+
+	users.printAllUsers();  //for testing purposes
+	return users;
+	
+
+	
+}
+
+//load Ids of borrowed books
+
+//books will be read based on a file of indexes
+	//Gets all of the user information except for the borrowed books
+
+//add relevant borrowed books to borrowed array
+
+
+UserLinkedList UserFile::loadUsers() {
+	UserLinkedList users = readUserFile();
+	//readBorrowedBooks();
+
 	return users;
 }
 
-//make multiple files
+
+//NOT DONE YET
+//can't finish until vector or file of books is created
+void UserFile::readBorrowedBooks() {
+	vector<string> bookIDs;
+
+	//getline of id file
+	//fill vector
+	//get books with those ids and add them to the borrowed book vector in each user
+	
+	fstream fs;
+	vector<Books> books;
+	string input;
+
+	fs.open("BorrowedBookIDs.txt");
+	if (!fs.is_open()) {
+		cout << "ERROR - could not open BorrowedBookIDs.txt file" << endl;
+	}
+	while (!fs.eof() && input != "End of File") {
+		cout << "Made it to While" << endl;
+		getline(fs, input);
+		cout << "Input: " << input << endl;
+		//if (input != "End of File") {
+			int pos = input.find(" ");
+			string id1 = input.substr(0, pos);
+			cout << pos << endl;
+			while (pos != -1) {
+				pos = input.find(" ", pos+1);
+				cout << pos << endl;
+				cout << "inner while" << endl;
+			}
+		//}
+	}
+}
 
 
 
-void UserFile::writeFile(Users users) {
-	Users usersInFile;
-	fstream fstr;
+//set it to rewrite everything after finishing the program
 
-	fstr.open("ListOfUsers.txt", ios::out);
-	if (!fstr.is_open()) {
+
+void UserFile::storeUsers(UserLinkedList users) {
+	ofstream ofsUser;
+	string output;
+	string numStr;
+
+	ofsUser.open("ListOfUsers.txt", ios::out);
+	if (!ofsUser.is_open()) {
 		cout << "File open was not successful" << endl;
 	}
 
-	//int index;
+	//store in ListOfUsers file
+	if (users.getHead() == NULL) {
+		cout << "There are no users." << endl;
+		return;
+	}
+	else {
+		UserNode* temp = users.getHead();
+		while (temp != NULL) {
+			User tempU = temp->data;
 
+			output = tempU.getFirstName() + ", ";
+			output += tempU.getLastName() + ", ";
+			output += tempU.getAddress() + ", ";
+			output += tempU.getPhoneNumber() + ", ";
+			output += tempU.getEmail() + ", ";
+			output += tempU.getPassword() + ", ";
+
+			stringstream ss;
+			ss << tempU.getInstructionID();
+			ss >> numStr;
+			output += numStr + ", ";
+
+			ss.clear();
+			ss << tempU.getLibraryID();
+			ss >> numStr;
+			output += numStr + ", ";
+
+			if (tempU.getIsDonor()) {
+				output += "Yes";
+			}
+			else {
+				output += "No";
+			}
+
+			ofsUser << output << endl;
+			temp = temp->next;
+		}
+		ofsUser << "End of File" << endl;
+	}
+	ofsUser.close();
+}
+
+void UserFile::storeBookIDs(UserLinkedList users) {
+	if (users.getHead() == NULL) {
+		cout << "There are no users." << endl;
+	}
+	else {
+		cout << "IN StoreBookIDs" << endl;
+		UserNode* temp = users.getHead();
+		int counter = 1;
+		while (temp != NULL) {
+			User tempU = temp->data;
+			
+			cout << "TEST" << endl;
+			vector<Books> bs;
+			Books book("Bob Bobbins", "THE FIRST book", "BestPublisherEver", 2, 1029, "publisher@gmail.com", "1234 address lane", 12.39);
+			bs.push_back(book);
+			for (Books b : bs) {
+				cout << b.GetISBN() << endl;
+			}
+
+			cout << "BOOKS" << endl;
+			vector<Books> bbs = tempU.getBorrowedBooks();
+			for (Books b : bbs) {
+				cout << b.GetISBN() << endl;
+			}
+
+			counter++;
+			temp = temp->next;
+		}
+		cout << endl;
+	}
+}
+
+
+/*
+void UserFile::storeBookIDs(UserLinkedList users) {
+	//Store ID's of each user's borrowed books
+	//ofstream ofsBookIDs;
+	//string bookIDs;
+
+	cout << "CAT" << endl;
 	
+	
+	/*
+	ofsBookIDs.open("BorrowedBookIDs.txt");
+	if (!ofsBookIDs.is_open()) {
+		cout << "Book ID File open was not successful" << endl;
+		return;
+	}
 
+	//store book ids in book id file
+	if (users.getHead() == NULL) {
+		cout << "There are no users." << endl;
+		return;
+	}
+	else {
+		UserNode* temp = users.getHead();
+		while (temp != NULL) {
+			User tempU = temp->data;
+			cout << "IN WHILE LOOP" << endl;
+			cout << tempU.test() << endl;
+			
+			//ofsBookIDs << bookIDs << endl;
+			temp = temp->next;
+		}
+		//ofsBookIDs << "End of File" << endl;
+	}
+	//ofsBookIDs.close();
+}*/
+
+//ListOfUsers has the following format for each line
+//firstName, lastName, address, phoneNumber, email, password, instructionID, libraryID, isDonor
+
+void UserFile::saveUsers(UserLinkedList users) {
+	storeUsers(users);  //storeUsers is working, but storeBookIDs is not
+	//storeBookIDs(users);
 }

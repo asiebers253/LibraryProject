@@ -1,1 +1,5 @@
-12345678
+Abby, Stout, 1414 Someplace Lane, 920-123-4567, stoua98@uwgb.edu, password, 12345678, 87654321, Yes
+Abster, Stout, 1414 Someplace Lane, 920-123-4567, stoua98@uwgb.edu, password, 12345678, 87654321, Yes
+Brent, Stout, 1414 Someplace Lane, 920-123-4567, stoua98@uwgb.edu, password, 12345678, 87654321, Yes
+Rebecca, Davis, 1093 Hillside Drive, 920-827-0234, davib24@uwgb.edu, SECRETpassword, 92837491, 10923475, Yes
+End of File
