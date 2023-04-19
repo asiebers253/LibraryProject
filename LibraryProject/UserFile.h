@@ -1,21 +1,21 @@
 #pragma once
 #ifndef Userfile_H
 #define Userfile_H
-#endif
+
+#include <vector>
 #include "UserLinkedList.h"
 #include "Books.h"
-#include <vector>
 
-//more will be added to this later
-
-class UserFile
-{
-public:
-	UserLinkedList loadUsers();
+class UserFile {
+private:
 	UserLinkedList readUserFile();
+	UserLinkedList readBorrowedBookIDsFile(UserLinkedList users);
+	UserLinkedList readBookSample(UserLinkedList users);
 	void storeUsers(UserLinkedList users);
 	void storeBookIDs(UserLinkedList users);
-	void readBorrowedBooks();
+public:
+	UserLinkedList loadUsers();
 	void saveUsers(UserLinkedList users);
 };
 
+#endif

@@ -1,8 +1,9 @@
 #pragma once
 #ifndef UserNode_H
 #define UserNode_H
-#endif
+
 #include "User.h"
+
 class UserNode
 {
 public:
@@ -10,3 +11,4 @@ public:
 	UserNode* next;
 };
 
+#endif

@@ -1,12 +1,12 @@
 #pragma once
+#ifndef USER_H
+#define USER_H
+
 #include <iostream>
 #include <cstring>
 #include <vector>
 #include "Books.h"
 using namespace std;
-#ifndef USER_H
-#define USER_H
-#endif
 
 class User
 {
@@ -24,19 +24,14 @@ private:
 	bool isDonor;
 	vector<Books> borrowedBooks;
 	
-
 public:
-	User();							//Default Constructor
-	User(string fn, string ln, string a, string pN, string e, string p, int iID, int lID, bool donor);	//Parametric Constructor
-	User(const User& u);			//Copy Constructor
-
-	//Other Functions
-	void printUserInfo();
-	bool isEqual(User u);
-	bool isValidLogin(string pwd); 
-		bool isThereBorrowedBooks();
-		void borrowBook(Books b);
-		string test();
+	//Default Constructor
+	User();
+	//Parametric Constructor
+	User(string fn, string ln, string a, string pN, string e, string p, int iID, int lID, bool donor);
+	User(string fn, string ln, string a, string pN, string e, string p, int iID, bool donor);
+	//Copy Constructor
+	User(const User& u);			
 
 	//Getters and Setters
 	string getFirstName() const;
@@ -61,8 +56,14 @@ public:
 	void setIsAdmin(bool admin);
 	bool getIsDonor() const;
 	void setIsDonor(bool d);
-	vector<Books> getBorrowedBooks();
+	vector<Books> getBorrowedBooks() const;
 	void setBorrowedBooks(vector<Books> books);
 	
+	//Other Functions
+	void print();
+	bool isEqual(User u);
+	bool isValidLogin(string pwd);
+	void borrowBook(Books b);
 };
 
+#endif

@@ -5,7 +5,7 @@ using namespace std;
 #include "UserNode.h"
 #include <vector>
 
-//Adds a user to the linked list
+//Adds a user to the end of the linked list
 void UserLinkedList::addUser(User u) {
 	UserNode* newnode = new UserNode();
 	newnode->data = u;
@@ -42,7 +42,7 @@ void UserLinkedList::removeUser(User u) {
 	}
 }
 
-//Returns the user at a given position in a linked list
+//Returns the user at a given position in the linked list
 User UserLinkedList::getUserAt(int index) {
 	if (head == NULL) {
 		cout << "There are no users." << endl;
@@ -86,9 +86,9 @@ void UserLinkedList::printAllUsers() {
 }
 
 //Prints the information from the user at a given position in the linked list
-void UserLinkedList::printUserInfoAt(int index) {
+void UserLinkedList::printUserAt(int index) {
 	User u = getUserAt(index);
-	u.printUserInfo();
+	u.print();
 }
 
 //A small function that runs in all search functions
@@ -285,56 +285,40 @@ bool UserLinkedList::isValidLogin(int ID, string password) {
 	}
 }
 
-//NEED TO FINISH
+
 //Used to register new users in our library system
-void UserLinkedList::registerUser(string fn, string ln, string a, string pn, string e, string p, int instID) {
-
-	User u;
-	u.setFirstName(fn);
-	u.setLastName(ln);
-	u.setAddress(a);
-	u.setPhoneNumber(pn);
-	u.setPassword(p);
-	u.setInstructionID(instID);
-	u.setIsGuest(false);
-
-	//Ask teacher if we need to have a password
+void UserLinkedList::registerUser(string fn, string ln, string a, string pN, string e, string p, int instID, bool donor) {
+	User u(fn, ln, a, pN, e, p, instID, donor);
 
 	//instID should have 8 numbers
 	//having 5 in front means their id is a student id
 	//having 6 in front means they are are an admin
-
 	int val = instID / 60000000;
-
 	if (val == 1) {
 		u.setIsAdmin(true);
 	}
 
 	//Creates a library ID (which is 8 numbers long)
-	u.setLibraryID(generateLibraryID());
-
-	//printing this out for testing purposes
-	cout << u.getLibraryID() << endl;
-
-	//check if donor by going through all of the books?
-	//This function assumes you can't borrow books without having an account
-
+	int id = 0;
+	while (id == 0 || isLibraryIDUsed(id)) {
+		id = generateLibraryID();
+	}
+	u.setLibraryID(id);
 	addUser(u);
 }
 
-//DOUBLE CHECK THAT THIS WORKS
 //Creates and returns a valid libraryID
 int UserLinkedList::generateLibraryID() {
-	int l, upperBound, lowerBound;
+	int id, upperBound, lowerBound;
 
 	do {
 		srand(time(0));
 		upperBound = 50000000;
 		lowerBound = 40000000;
-		l = ((rand() % (upperBound - lowerBound + 1)) + lowerBound);
+		id = ((rand() % (upperBound - lowerBound + 1)) + lowerBound);
 	} while (isLibraryIDUsed(l) && l < upperBound && l > lowerBound);
 
-	return l;
+	return id;
 }
 
 bool UserLinkedList::isLibraryIDUsed(int id) {
@@ -354,26 +338,4 @@ bool UserLinkedList::isLibraryIDUsed(int id) {
 		return false;
 	}
 	return false;
-}
-
-void UserLinkedList::test() {
-	cout << "IN TEST FUNCTION" << endl;
-	User u = getUserAt(1);
-
-	vector<Books> testBooks;
-	Books book("Bob Bobbins", "THE FIRST book", "BestPublisherEver", 2, 1029, "publisher@gmail.com", "1234 address lane", 12.39); //for testing purposes
-	testBooks.push_back(book);
-	cout << "TEST BOOKS" << endl;
-	for (Books b : testBooks) {
-		cout << b.GetPrice() << endl;
-	}
-
-	u.borrowBook(book);
-
-
-	cout << "BOOKS" << endl;
-	vector<Books> books = u.getBorrowedBooks();
-	for (Books b : books) {
-		cout << b.GetPrice() << endl;
-	}
 }

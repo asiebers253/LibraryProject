@@ -5,7 +5,7 @@
 #include "Books.h"
 using namespace std;
 
-//Default Constructor (Guest User Constructor)
+//Default Constructor
 User::User() {
 	//shows all "empty" values for each variable
 	firstName = "None";
@@ -19,11 +19,11 @@ User::User() {
 	isGuest = true;
 	isAdmin = false;
 	isDonor = false;
-	
+	vector<Books> empty;
+	borrowedBooks = empty;
 }
 
-//Parametric Constructor (Standard and Admin User Constructor) 
-//MAKE VARIENTS FOR ADDING SPECIFIC BOOKS
+//Parametric Constructor (No Borrowed Books)
 User::User(string fn, string ln, string a, string pN, string e, string p, int iID, int lID, bool donor) {
 	firstName = fn;
 	lastName = ln;
@@ -41,18 +41,35 @@ User::User(string fn, string ln, string a, string pN, string e, string p, int iI
 		isAdmin = false;
 	}
 	isDonor = donor;
-	//for (Books b : books) {
-	//	borrowedBooks.push_back(b);
-	//}
-	//Books book("Bob Bobbins", "THE FIRST book", "BestPublisherEver", 2, 1029, "publisher@gmail.com", "1234 address lane", 12.39); //for testing purposes
-	//borrowedBooks.push_back(book);
+	vector<Books> empty;
+	borrowedBooks = empty;
 }
 
+//Parametric Constructor (For RegisterUser function in UserLinkedList)
+User::User(string fn, string ln, string a, string pN, string e, string p, int iID, bool donor) {
+	firstName = fn;
+	lastName = ln;
+	address = a;
+	phoneNumber = pN;
+	email = e;
+	password = p;
+	instructionID = iID;
+	libraryID = 0;
+	isGuest = false;
+	if (iID / 60000000 == 1) {
+		isAdmin = true;
+	}
+	else {
+		isAdmin = false;
+	}
+	isDonor = donor;
+	vector<Books> empty;
+	borrowedBooks = empty;
+}
 
-//Will be modified later!
 //Copy Constructor
 User::User(const User& u) : firstName(u.firstName), lastName(u.lastName), address(u.address), phoneNumber(u.phoneNumber), email(u.email), 
-password(u.password), instructionID(u.instructionID), libraryID(u.libraryID), isGuest(u.isGuest), isAdmin(u.isAdmin), isDonor(u.isDonor) {}
+password(u.password), instructionID(u.instructionID), libraryID(u.libraryID), isGuest(u.isGuest), isAdmin(u.isAdmin), isDonor(u.isDonor), borrowedBooks(u.borrowedBooks) {}
 
 //Getter Functions
 string User::getFirstName() const { return firstName; }
@@ -66,7 +83,7 @@ int User::getLibraryID() const { return libraryID; }
 bool User::getIsGuest() const { return isGuest; }
 bool User::getIsAdmin() const { return isAdmin; }
 bool User::getIsDonor() const { return isDonor; }
-vector<Books> User::getBorrowedBooks() { return borrowedBooks; }
+vector<Books> User::getBorrowedBooks() const { return borrowedBooks; }
 
 //Setter Functions
 void User::setFirstName(string fn) { firstName = fn; }
@@ -83,7 +100,7 @@ void User::setIsDonor(bool d) { isDonor = d; }
 void User::setBorrowedBooks(vector<Books> bks) { borrowedBooks = bks; }
 
 //Prints all of the relevant information about the user
-void User::printUserInfo() {
+void User::print() {
 	cout << " User Information - " << firstName << " " << lastName << endl;
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 	cout << " Address: " << address << endl;
@@ -98,22 +115,24 @@ void User::printUserInfo() {
 		cout << "No" << endl;
 	}
 	if (borrowedBooks.empty()) {
-		cout << "This user is not currently borrowing any books." << endl;
+		cout << " This user is not currently borrowing any books." << endl;
 	}
 	else {
-		cout << "Currently borrowed books: ";
+		cout << " Currently borrowed books: " << endl;
+		string books = " ";
 		for (Books b : borrowedBooks) {
-			cout << b.GetTitle() << " ";
+			books += b.GetTitle() + ", ";
 		}
-		cout << endl;
+		books = books.substr(0, books.length() - 2);
+		cout << books << endl;
 	}
 	cout << endl;
 }
 
-//Will be modified later!
-//Check is the user is equal to a given user
+//Not Finished!
+//Checks if the user is equal to a given user
 bool User::isEqual(User u) {
-	bool sN = false, sA = false, sPN = false, sE = false, sP = false, sIID = false, sLID = false, sPER = false, sD = false;  //add bool sameBooksBorrowed
+	bool sN = false, sA = false, sPN = false, sE = false, sP = false, sIID = false, sLID = false, sPER = false, sD = false, sBB = false;
 
 	if (firstName == u.getFirstName() && lastName == u.getLastName()) { sN = true; }
 	if (address == u.getAddress()) { sA = true; }
@@ -124,7 +143,7 @@ bool User::isEqual(User u) {
 	if (libraryID == u.getLibraryID()) { sLID = true; }
 	if (u.getIsGuest() == false && isAdmin == u.getIsAdmin()) { sPER = true; }
 	if (isDonor == u.getIsDonor()) { sD = true; }
-	//Add something to compare borrowed books
+	//something to check if books are equal to each other should be added to the book class
 
 	if (sN && sA && sPN && sE && sP && sIID && sLID && sPER && sD) { return true; } else { return false; }
 }
@@ -137,24 +156,7 @@ bool User::isValidLogin(string pwd) {
 	return false;
 }
 
-bool User::isThereBorrowedBooks() {
-	if (borrowedBooks.empty()) {
-		return false;
-	}
-	return true;
-}
-
+//Add a book to the user's vector of borrowed books
 void User::borrowBook(Books b) {
 	borrowedBooks.push_back(b);
-	//for (Books b : borrowedBooks) {
-	//	cout << b.GetTitle() << endl;
-	//}
 }
-
-string User::test() {
-	Books book1("Bob", "THE book", "BestPublisherEver", 2, 1234, "publisher@gmail.com", "1234 address lane", 12.39);
-	Books book("Bob Bobbins", "THE FIRST book", "BestPublisherEver", 2, 1029, "publisher@gmail.com", "1234 address lane", 12.39);
-	vector<Books> b = { book, book1 };
-	setBorrowedBooks(b);
-}
-

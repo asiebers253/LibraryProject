@@ -1,12 +1,11 @@
 #pragma once
+#ifndef UserLinkedList_H
+#define UserLinkedList_H
+
 #include <iostream>
 #include "UserNode.h"
 #include "User.h"
 using namespace std;
-#ifndef UserLinkedList_H
-#define UserLinkedList_H
-#endif
-
 
 class UserLinkedList {
 private:
@@ -17,13 +16,13 @@ public:
 	~UserLinkedList() {}
 
 	//Finding and Modifying Users
-	void registerUser(string, string, string, string, string, string, int);
+	void registerUser(string, string, string, string, string, string, int, bool);
 	void addUser(User u);
 	void removeUser(User u);
 	User getUserAt(int index);
 
 	//Print functions
-	void printUserInfoAt(int index);
+	void printUserAt(int index);
 	void printAllUsers();
 
 	//Search functions
@@ -40,3 +39,5 @@ public:
 	UserNode* getHead() { return head;}
 	void test();
 };
+
+#endif
