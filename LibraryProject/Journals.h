@@ -1,11 +1,11 @@
-#pragma once
-#ifndef books_h
-#define books_h
+#ifndef JOURNALS_H
+#define JOURNALS_H
+
 #include "Inventory.h"
 #include <string>
 using namespace std;
 
-class Books : public Inventory {
+class Journals : public Inventory {
 private:
 	string author;
 	string title;
@@ -13,12 +13,9 @@ private:
 	int ISBN;
 	double price;
 public:
-
-	Books();
-
-	Books(string author, string title, int edition, int ISBN, double price);
-
-	~Books();
+	Journals();
+	Journals(string author, string title, int edition, int ISBN, double price);
+	~Journals();
 
 	string GetAuthor() {}
 
@@ -39,9 +36,6 @@ public:
 	double GetPrice() {}
 
 	void SetPrice(double pr) {}
-
-
 };
 
 #endif
-
