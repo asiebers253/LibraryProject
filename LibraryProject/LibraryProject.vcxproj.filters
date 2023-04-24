@@ -24,13 +24,13 @@
     <ClCompile Include="User.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Users.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="UserLinkedList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Books.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UserFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -39,9 +39,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="User.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Users.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Books.h">
@@ -53,19 +50,7 @@
     <ClInclude Include="UserLinkedList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Inventory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Publisher.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Journals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Newspapers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Periodicals.h">
+    <ClInclude Include="UserFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

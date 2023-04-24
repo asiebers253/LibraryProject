@@ -5,7 +5,8 @@ using namespace std;
 #include "UserNode.h"
 #include <vector>
 
-void UserLinkedList::addNode(User u) {
+//Adds a user to the end of the linked list
+void UserLinkedList::addUser(User u) {
 	UserNode* newnode = new UserNode();
 	newnode->data = u;
 	newnode->next = NULL;
@@ -22,6 +23,83 @@ void UserLinkedList::addNode(User u) {
 	}
 }
 
+//Removes a user from the linked list
+void UserLinkedList::removeUser(User u) {
+	if (head == NULL) {
+		cout << "No users to remove. " << endl;
+	} else {
+		UserNode* prevNode = head;
+		UserNode* currNode = head->next;
+		while (currNode != NULL) {
+			User currUser = currNode->data;
+			if (currUser.isEqual(u)) {
+				prevNode->next = currNode->next;
+				break;
+			}
+			prevNode = currNode;
+			currNode = currNode->next;
+		}
+	}
+}
+
+//Returns the user at a given position in the linked list
+User UserLinkedList::getUserAt(int index) {
+	if (head == NULL) {
+		cout << "There are no users." << endl;
+		User u;
+		return u;
+	}
+	else {
+		UserNode* temp = head;
+		int counter = 1;
+		while (temp != NULL) {
+			User tempU = temp->data;
+			if (counter == index) {
+				return tempU;
+			}
+			counter++;
+			temp = temp->next;
+		}
+	}
+}
+
+//Prints all of the users in the linked list
+void UserLinkedList::printAllUsers() {
+	cout << " All Users in the Library System" << endl;
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	
+	if (head == NULL) {
+			cout << "There are no users." << endl;
+	} else {
+		UserNode* temp = head;
+		int counter = 1;
+		while (temp != NULL) {
+			User tempU = temp->data;
+			string fn = tempU.getFirstName();
+			string ln = tempU.getLastName();
+			cout << " [" << counter << "] " << tempU.getFirstName() << " " << tempU.getLastName() << endl;
+			counter++;
+			temp = temp->next;
+		}
+		cout << endl;
+	}
+}
+
+//Prints the information from the user at a given position in the linked list
+void UserLinkedList::printUserAt(int index) {
+	User u = getUserAt(index);
+	u.print();
+}
+
+//A small function that runs in all search functions
+void UserLinkedList::searchBy(string str) {
+	cout << " Search results for " << str << endl;
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+	if (head == NULL) { cout << "There are no users to search." << endl; }
+}
+
+//modify to list matches to first or last name first, then the other?
+//Searches the linked list for users with the given name
 UserLinkedList UserLinkedList::searchByName(string n) {
 	UserLinkedList results;
 	searchBy(n);
@@ -32,10 +110,17 @@ UserLinkedList UserLinkedList::searchByName(string n) {
 		int counter = 0;
 		while (temp != NULL) {
 			tempU = temp->data;
-			if (tempU.getFirstName() == n || tempU.getLastName() == n) {
+
+			//get the user's first and last name
+			string fn = tempU.getFirstName();
+			string ln = tempU.getLastName();
+
+			//check if the given string is in either the first or last name
+
+			if (fn.find(n) != string::npos|| ln.find(n) != string::npos) {
 				counter++;
 				cout << " [" << counter << "] " << tempU.getFirstName() << " " << tempU.getLastName() << endl;
-				results.addNode(tempU);
+				results.addUser(tempU);
 			}
 			temp = temp->next;
 		}
@@ -47,12 +132,7 @@ UserLinkedList UserLinkedList::searchByName(string n) {
 	return results;
 }
 
-void UserLinkedList::searchBy(string str) {
-	cout << " Search results for " << str << endl;
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-	if (head == NULL) { cout << "There are no users to search." << endl; }
-}
-
+//Searches the linked list for users with the given email
 UserLinkedList UserLinkedList::searchByEmail(string e) {
 	UserLinkedList results;
 	searchBy(e);
@@ -63,11 +143,14 @@ UserLinkedList UserLinkedList::searchByEmail(string e) {
 		int counter = 0;
 		while (temp != NULL) {
 			tempU = temp->data;
-			if (tempU.getEmail() == e) {
+
+			string email = tempU.getEmail();
+
+			if (email.find(e) != string::npos) {
 				counter++;
 				cout << " [" << counter << "] " << tempU.getFirstName() << " " << tempU.getLastName();
 				cout << " (" << tempU.getEmail() << ")" << endl;
-				results.addNode(tempU);
+				results.addUser(tempU);
 			}
 			temp = temp->next;
 		}
@@ -79,6 +162,7 @@ UserLinkedList UserLinkedList::searchByEmail(string e) {
 	return results;
 }
 
+//Searches the linked list for users with the given address
 UserLinkedList UserLinkedList::searchByAddress(string a) {
 	UserLinkedList results;
 	searchBy(a);
@@ -89,11 +173,14 @@ UserLinkedList UserLinkedList::searchByAddress(string a) {
 		int counter = 0;
 		while (temp != NULL) {
 			tempU = temp->data;
-			if (tempU.getAddress() == a) {
+
+			string address = tempU.getAddress();
+
+			if (address.find(a) != string::npos) {
 				counter++;
 				cout << " [" << counter << "] " << tempU.getFirstName() << " " << tempU.getLastName();
 				cout << " (" << tempU.getAddress() << ")" << endl;
-				results.addNode(tempU);
+				results.addUser(tempU);
 			}
 			temp = temp->next;
 		}
@@ -105,6 +192,7 @@ UserLinkedList UserLinkedList::searchByAddress(string a) {
 	return results;
 }
 
+//Searches the linked list for users with the given phone number
 UserLinkedList UserLinkedList::searchByPhoneNumber(string pn) {
 	UserLinkedList results;
 	searchBy(pn);
@@ -115,11 +203,14 @@ UserLinkedList UserLinkedList::searchByPhoneNumber(string pn) {
 		int counter = 0;
 		while (temp != NULL) {
 			tempU = temp->data;
-			if (tempU.getPhoneNumber() == pn) {
+
+			string phoneNumber = tempU.getPhoneNumber();
+
+			if (phoneNumber.find(pn) != string::npos) {
 				counter++;
 				cout << " [" << counter << "] " << tempU.getFirstName() << " " << tempU.getLastName();
 				cout << " (" <<  tempU.getPhoneNumber() << ")" << endl;
-				results.addNode(tempU);
+				results.addUser(tempU);
 			}
 			temp = temp->next;
 		}
@@ -131,6 +222,7 @@ UserLinkedList UserLinkedList::searchByPhoneNumber(string pn) {
 	return results;
 }
 
+//Searches the linked list for users with the given keyword
 UserLinkedList UserLinkedList::searchByKeyword(string key) {
 	UserLinkedList results;
 	searchBy(key);
@@ -159,7 +251,7 @@ UserLinkedList UserLinkedList::searchByKeyword(string key) {
 			if (keyInFirstName || keyInLastName || keyInAddress || keyInEmail || keyInPhoneNumber) {
 				counter++;
 				cout << " [" << counter << "] " << tempU.getFirstName() << " " << tempU.getLastName() << endl;
-				results.addNode(tempU);
+				results.addUser(tempU);
 			}
 			temp = temp->next;
 		}
@@ -169,4 +261,81 @@ UserLinkedList UserLinkedList::searchByKeyword(string key) {
 	}
 
 	return results;
+}
+
+//Returns true if login was sucessful (valid) and false if login was unsuccessful (invalid)
+bool UserLinkedList::isValidLogin(int ID, string password) {
+	if (head == NULL) {
+		cout << "There are no users." << endl;
+		return false;
+	}
+	else {
+		UserNode* temp = head;
+		int counter = 1;
+		while (temp != NULL) {
+			User tempU = temp->data;
+			//Find the user with the same ID
+			if (ID == tempU.getLibraryID()) {
+				//Check if the password entered is the same as the User's password
+				return tempU.isValidLogin(password);
+			}
+			temp = temp->next;
+		}
+		return false;
+	}
+}
+
+
+//Used to register new users in our library system
+void UserLinkedList::registerUser(string fn, string ln, string a, string pN, string e, string p, int instID, bool donor) {
+	User u(fn, ln, a, pN, e, p, instID, donor);
+
+	//instID should have 8 numbers
+	//having 5 in front means their id is a student id
+	//having 6 in front means they are are an admin
+	int val = instID / 60000000;
+	if (val == 1) {
+		u.setIsAdmin(true);
+	}
+
+	//Creates a library ID (which is 8 numbers long)
+	int id = 0;
+	while (id == 0 || isLibraryIDUsed(id)) {
+		id = generateLibraryID();
+	}
+	u.setLibraryID(id);
+	addUser(u);
+}
+
+//Creates and returns a valid libraryID
+int UserLinkedList::generateLibraryID() {
+	int id, upperBound, lowerBound;
+
+	do {
+		srand(time(0));
+		upperBound = 50000000;
+		lowerBound = 40000000;
+		id = ((rand() % (upperBound - lowerBound + 1)) + lowerBound);
+	} while (isLibraryIDUsed(l) && l < upperBound && l > lowerBound);
+
+	return id;
+}
+
+bool UserLinkedList::isLibraryIDUsed(int id) {
+	if (head != NULL) {
+		UserNode* temp = head;
+		User tempU;
+		int counter = 0;
+		while (temp != NULL) {
+			tempU = temp->data;
+			int libraryID = tempU.getLibraryID();
+
+			if (libraryID == id) {
+				return true;
+			}
+			temp = temp->next;
+		}
+		return false;
+	}
+	return false;
 }

@@ -1,11 +1,11 @@
 #include "User.h"
 #include <iostream>
 #include <cstring>
+#include <vector>
+#include "Books.h"
 using namespace std;
 
-//add something to create users with randomly generated ids for library id?
-
-//Default Constructor (Guest User Constructor)
+//Default Constructor
 User::User() {
 	//shows all "empty" values for each variable
 	firstName = "None";
@@ -19,13 +19,12 @@ User::User() {
 	isGuest = true;
 	isAdmin = false;
 	isDonor = false;
-	//borrowedBooks = null;
+	vector<Books> empty;
+	borrowedBooks = empty;
 }
 
-//Parametric Constructors (Standard User and Admin User Constructor)
-
-//
-User::User(string fn, string ln, string a, string pN, string e, string p, int iID, int lID, bool authorized, bool donor/*, vector<Book> books = */) {
+//Parametric Constructor (No Borrowed Books)
+User::User(string fn, string ln, string a, string pN, string e, string p, int iID, int lID, bool donor) {
 	firstName = fn;
 	lastName = ln;
 	address = a;
@@ -35,18 +34,42 @@ User::User(string fn, string ln, string a, string pN, string e, string p, int iI
 	instructionID = iID;
 	libraryID = lID;
 	isGuest = false;
-	if (authorized) {
+	if (iID / 60000000 == 1) {
 		isAdmin = true;
-	} else {
+	}
+	else {
 		isAdmin = false;
 	}
 	isDonor = donor;
-	//borrowedBooks = books;
+	vector<Books> empty;
+	borrowedBooks = empty;
+}
+
+//Parametric Constructor (For RegisterUser function in UserLinkedList)
+User::User(string fn, string ln, string a, string pN, string e, string p, int iID, bool donor) {
+	firstName = fn;
+	lastName = ln;
+	address = a;
+	phoneNumber = pN;
+	email = e;
+	password = p;
+	instructionID = iID;
+	libraryID = 0;
+	isGuest = false;
+	if (iID / 60000000 == 1) {
+		isAdmin = true;
+	}
+	else {
+		isAdmin = false;
+	}
+	isDonor = donor;
+	vector<Books> empty;
+	borrowedBooks = empty;
 }
 
 //Copy Constructor
 User::User(const User& u) : firstName(u.firstName), lastName(u.lastName), address(u.address), phoneNumber(u.phoneNumber), email(u.email), 
-password(u.password), instructionID(u.instructionID), libraryID(u.libraryID), isGuest(u.isGuest), isAdmin(u.isAdmin), isDonor(u.isDonor) {}
+password(u.password), instructionID(u.instructionID), libraryID(u.libraryID), isGuest(u.isGuest), isAdmin(u.isAdmin), isDonor(u.isDonor), borrowedBooks(u.borrowedBooks) {}
 
 //Getter Functions
 string User::getFirstName() const { return firstName; }
@@ -60,7 +83,7 @@ int User::getLibraryID() const { return libraryID; }
 bool User::getIsGuest() const { return isGuest; }
 bool User::getIsAdmin() const { return isAdmin; }
 bool User::getIsDonor() const { return isDonor; }
-//vector<Book> User::getBorrowedBooks() const { return borrowedBooks; }
+vector<Books> User::getBorrowedBooks() const { return borrowedBooks; }
 
 //Setter Functions
 void User::setFirstName(string fn) { firstName = fn; }
@@ -74,9 +97,10 @@ void User::setLibraryID(int lID) { libraryID = lID; }
 void User::setIsGuest(bool g) { isGuest = g; }
 void User::setIsAdmin(bool admin) { isAdmin = admin; }
 void User::setIsDonor(bool d) { isDonor = d; }
-//void User::setBorrowedBooks(vector<book> books) { borrowedBooks = books; }
+void User::setBorrowedBooks(vector<Books> bks) { borrowedBooks = bks; }
 
-void User::printUserInfo() {
+//Prints all of the relevant information about the user
+void User::print() {
 	cout << " User Information - " << firstName << " " << lastName << endl;
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 	cout << " Address: " << address << endl;
@@ -90,12 +114,49 @@ void User::printUserInfo() {
 	} else {
 		cout << "No" << endl;
 	}
-	/*if (the user has borrowed books) {
-		for (the size of the vector or linkedlist) {
-			print out every book title in the list
+	if (borrowedBooks.empty()) {
+		cout << " This user is not currently borrowing any books." << endl;
+	}
+	else {
+		cout << " Currently borrowed books: " << endl;
+		string books = " ";
+		for (Books b : borrowedBooks) {
+			books += b.GetTitle() + ", ";
 		}
-	}*/
+		books = books.substr(0, books.length() - 2);
+		cout << books << endl;
+	}
 	cout << endl;
 }
 
+//Not Finished!
+//Checks if the user is equal to a given user
+bool User::isEqual(User u) {
+	bool sN = false, sA = false, sPN = false, sE = false, sP = false, sIID = false, sLID = false, sPER = false, sD = false, sBB = false;
 
+	if (firstName == u.getFirstName() && lastName == u.getLastName()) { sN = true; }
+	if (address == u.getAddress()) { sA = true; }
+	if (email == u.getEmail()) { sE = true; }
+	if (phoneNumber == u.getPhoneNumber()) { sPN = true; }
+	if (password == u.getPassword()) { sP = true; }
+	if (instructionID == u.getInstructionID()) { sIID = true; }
+	if (libraryID == u.getLibraryID()) { sLID = true; }
+	if (u.getIsGuest() == false && isAdmin == u.getIsAdmin()) { sPER = true; }
+	if (isDonor == u.getIsDonor()) { sD = true; }
+	//something to check if books are equal to each other should be added to the book class
+
+	if (sN && sA && sPN && sE && sP && sIID && sLID && sPER && sD) { return true; } else { return false; }
+}
+
+//Checks if a login attempt was successful
+bool User::isValidLogin(string pwd) {
+	if (password == pwd) {
+		return true;
+	}
+	return false;
+}
+
+//Add a book to the user's vector of borrowed books
+void User::borrowBook(Books b) {
+	borrowedBooks.push_back(b);
+}

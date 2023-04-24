@@ -1,1 +1,5 @@
-John Adams 1234 Marsh Grassland Lane adamjj89@uwgb.edu 12345678 87654321 yes ...
+Abby, Stout, 1414 Someplace Lane, 920-123-4567, stoua98@uwgb.edu, password, 12345678, 87654321, Yes
+Abster, Stout, 1414 Someplace Lane, 920-123-4567, stoua98@uwgb.edu, password, 12345678, 87654321, Yes
+Brent, Stout, 1414 Someplace Lane, 920-123-4567, stoua98@uwgb.edu, password, 12345678, 87654321, Yes
+Rebecca, Stout, 1414 Someplace Lane, 920-123-4567, stoua98@uwgb.edu, password, 12345678, 87654321, Yes
+End of File
