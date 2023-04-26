@@ -6,7 +6,17 @@
 #include <string>
 #include "Books.h"
 #include <vector>
+#include "Student.h"
+#include "Employee.h"
 using namespace std;
+
+//tack on something at the end of the each user to determine if they are a student or employee
+
+
+//add something to add individual users to the file
+//add something to modify a value in the user file
+//same with book id stuff
+
 
 //Will Be Modified Later!
 //Runs all of the functions needed to load all of the user information from various files
@@ -28,13 +38,9 @@ void UserFile::saveUsers(UserLinkedList users) {
 UserLinkedList UserFile::readUserFile() {
 	fstream fs;
 	UserLinkedList users;
-	User u;
-	u.setIsGuest(false);
 	string userInfo;
-	int num;
-	int counter = 1;
-	int pos;
-	int prevPos;
+	int num, pos = 0, prevPos = 0, counter = 1;
+	string info;
 
 	fs.open("ListOfUsers.txt");
 	if (!fs.is_open()) {
@@ -43,65 +49,83 @@ UserLinkedList UserFile::readUserFile() {
 	}
 
 	//ListOfUsers has the following format for each line
-	//firstName, lastName, address, phoneNumber, email, password, instructionID, libraryID, isDonor
+	//firstName, lastName, address, phoneNumber, email, password, instructionID, libraryID, isDonor, type
+
+	//COMMENT OUT STUFF THAT PRINTS OUT
 
 	while (!fs.eof()) {
 		getline(fs, userInfo);
+		cout << userInfo << endl;
+		pos = 0;
+		prevPos = 0;
+		info = "";
+		counter = 1;
 		if (userInfo != "End of File") {
 			pos = userInfo.find(",");
+			cout << "First pos: " << pos << endl;
 			string fn = userInfo.substr(0, pos);
-			if (fn != "") {
-				u.setFirstName(fn);
+			cout << fn << endl;
+			//if (fn != "") {
+				string ln, a, pN, e, p, type;
+				int id, lid;
+				bool donor = false;
 
 				while (counter <= 9) {
 					//Get the info
 					counter++;
 					prevPos = pos;
 					pos = userInfo.find(",", prevPos + 1);
-					string info = userInfo.substr(prevPos + 2, pos - (prevPos + 2));
+					info = userInfo.substr(prevPos + 2, pos - (prevPos + 2));
 
-					//If needed, change the info from a string to an int
-					if (counter == 7 || counter == 8) {
-						stringstream ss;
-						ss << info;
-						ss >> num;
-					}
+					cout << info << endl;
 
-					//Add the information to the user object
+					//Get the information needed to make the user object
 					if (counter == 2) {
-						u.setLastName(info);
+						ln = info;
 					}
 					else if (counter == 3) {
-						u.setAddress(info);
+						a = info;
 					}
 					else if (counter == 4) {
-						u.setPhoneNumber(info);
+						pN = info;
 					}
 					else if (counter == 5) {
-						u.setEmail(info);
+						e = info;
 					}
 					else if (counter == 6) {
-						u.setPassword(info);
+						p = info;
 					}
 					else if (counter == 7) {
-						u.setInstructionID(num);
-						if ((num / 60000000) == 1) {
-							u.setIsAdmin(true);
-						}
+						id = strToInt(info);
 					}
 					else if (counter == 8) {
-						u.setLibraryID(num);
+						lid = strToInt(info);
 					}
-					else {
+					else if (counter == 9) {
 						if (info == "Yes" || info == "yes") {
-							u.setIsDonor(true);
+							donor = true;
 						}
 					}
+					else {
+						type = info;
+					}
+
+					//cout << p << " " << id << " " << lid << endl;
 
 				}
+
+				//Create the user and add them to the UserLinkedList
+				if (type == "Student") {
+					Student st(fn, ln, a, pN, e, p, id, lid, donor);
+					users.addUser(st);
+					//users.printUserAt(1);
+				}
+				else {
+					Employee em(fn, ln, a, pN, e, p, id, lid, donor);
+					users.addUser(em);
+				}
 				//u.printUserInfo(); //for testing purposes
-				users.addUser(u);
-			}
+		//	}
 		}
 
 	}
@@ -136,7 +160,7 @@ UserLinkedList UserFile::readBorrowedBookIDsFile(UserLinkedList users) {
 
 	while (!fs.eof() && input != "End of File") {
 		getline(fs, input);
-		cout << "Input: " << input << endl;
+		//cout << "Input: " << input << endl;
 		books.clear();
 		if (input != "End of File") {
 			while (currPos != -1 && input != "") {
@@ -148,13 +172,13 @@ UserLinkedList UserFile::readBorrowedBookIDsFile(UserLinkedList users) {
 				else {
 					prevPos = currPos;
 					currPos = input.find(" ", prevPos + 1);
-					cout << "prevPos: " << prevPos << " currPos: " << currPos << endl;
+					//cout << "prevPos: " << prevPos << " currPos: " << currPos << endl;
 					strID = input.substr(prevPos + 1, currPos - prevPos);
 					ss.clear();
 				}
 				ss << strID;
 				ss >> id;
-				cout << id << endl; //for testing purposes
+				//cout << id << endl; //for testing purposes
 				//book = //findBookByID(id);
 				//books.push_back(book)
 			}
@@ -206,6 +230,7 @@ UserLinkedList UserFile::readBookSample(UserLinkedList users) {
 }
 
 //Store the relevant information from each user in the given UserLinkedList into the ListOfUsers.txt file
+//NEEDS TO BE MODIFIED FOR CHANGES WITH USER CLASS
 void UserFile::storeUsers(UserLinkedList users) {
 	ofstream ofsUser;
 	string output;
@@ -237,7 +262,7 @@ void UserFile::storeUsers(UserLinkedList users) {
 			output += tempU.getPassword() + ", ";
 
 			stringstream ss;
-			ss << tempU.getInstructionID();
+			ss << tempU.getID();
 			ss >> numStr;
 			output += numStr + ", ";
 
@@ -286,7 +311,7 @@ void UserFile::storeBookIDs(UserLinkedList users) {
 				output += val + " ";
 			}
 			output = output.substr(0, output.length() - 1);
-			cout << output << endl; //for testing purposes
+			//cout << output << endl; //for testing purposes
 			ofs << output << endl;
 			
 
@@ -296,4 +321,12 @@ void UserFile::storeBookIDs(UserLinkedList users) {
 		ofs << "End of File" << endl;
 		
 		ofs.close();
+}
+
+int UserFile::strToInt(string str) {
+	stringstream ss;
+	int value = 0;
+	ss << str;
+	ss >> value;
+	return value;
 }

@@ -11,15 +11,17 @@ class UserLinkedList {
 private:
 	UserNode* head;
 	void searchBy(string str);
+	int totalUsers = 0;
 public:
 	UserLinkedList() { head = NULL; }
 	~UserLinkedList() {}
 
 	//Finding and Modifying Users
-	void registerUser(string, string, string, string, string, string, int, bool);
+	User registerUser(string, string, string, string, string, string, int, bool);
 	void addUser(User u);
 	void removeUser(User u);
 	User getUserAt(int index);
+	User getUser(int instID);
 
 	//Print functions
 	void printUserAt(int index);
@@ -38,6 +40,7 @@ public:
 	bool isLibraryIDUsed(int);
 	UserNode* getHead() { return head;}
 	void test();
+	int getTotalUsers() { return totalUsers; }
 };
 
 #endif
