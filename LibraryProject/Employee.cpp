@@ -46,6 +46,7 @@ bool Employee::isEqual(Employee e) {
 
 */
 //assuming all users have different ids, only the ids need to be compared
+
 /*
 bool Employee::isEqual(Employee u) {
 	bool sN = false, sA = false, sPN = false, sE = false, sP = false, sIID = false, sLID = false, sPER = false, sD = false, sBB = false;

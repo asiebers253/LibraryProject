@@ -11,7 +11,7 @@ using namespace std;
 //functions for logging in and for creating a new user seem to work, but the how it prints out should be cleaned up
 
 Menus::Menus() {
-	cout << "in menus" << endl;
+	//cout << "in menus" << endl;
 	UserFile uf;
 	users = uf.loadUsers();
 	//users.printAllUsers();
@@ -316,7 +316,6 @@ void Menus::createUser() {
 
 }
 
-
 //Sets up the title and options for the main menu
 //Also gets what option the user would like to select
 void Menus::setupMain() {
@@ -359,7 +358,6 @@ void Menus::menuName(string name) {
 	cout << setw(40) << setfill('~') << ""  << setfill(' ') << endl;
 }
 
-
 //Allows the user to log in
 //WORKS but may modify
 void Menus::login() {
@@ -381,22 +379,13 @@ void Menus::login() {
 	}
 	if (username == -1) { return; }
 
-	//for testing
-	cout << username/1 << endl;
-
-	User test = users.getUserAt(2);
-	cout << "User 2's Library ID: " << test.getLibraryID() << endl;
-	if (username == test.getLibraryID()) {
-		cout << "they are equal" << endl;
-	}
-
-
 	cout << endl;
 	password = getString("What is your password?");
 	if (password == "-1") { return; }
 
 	//Check if the username and password match a user in the users UserLinkedList
 	loginSucessful = users.isValidLogin(username, password);
+	//While login is not sucessful
 	while (!loginSucessful) {
 		cout << "The username and/or password you entered is not valid." << endl;
 		cout << endl;
@@ -411,15 +400,10 @@ void Menus::login() {
 		cout << endl;
 		password = getString("What is your password?");
 		if (password == "-1") { return; }
-		//cout << loginSucessful;
 		loginSucessful = users.isValidLogin(username, password);
 	}
 
-	
-	//cout << "SUCESSFUL LOGIN" << endl;
-	
-
-	//depending on id, send to standard or admin main
+	//Login was sucessful
 	adminMain(username);
 }
 
@@ -448,6 +432,4 @@ void Menus::adminMain(int username) {
 		printOptions(options);
 		int choice = getInput();
 	}
-	
-
 }

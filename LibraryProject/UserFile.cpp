@@ -56,16 +56,16 @@ UserLinkedList UserFile::readUserFile() {
 
 	while (!fs.eof()) {
 		getline(fs, userInfo);
-		cout << userInfo << endl;
+		//cout << userInfo << endl;
 		pos = 0;
 		prevPos = 0;
 		info = "";
 		counter = 1;
 		if (userInfo != "End of File") {
 			pos = userInfo.find(",");
-			cout << "First pos: " << pos << endl;
+			//cout << "First pos: " << pos << endl;
 			string fn = userInfo.substr(0, pos);
-			cout << fn << endl;
+			//cout << fn << endl;
 			//if (fn != "") {
 				string ln, a, pN, e, p, type;
 				int id, lid;
@@ -78,7 +78,7 @@ UserLinkedList UserFile::readUserFile() {
 					pos = userInfo.find(",", prevPos + 1);
 					info = userInfo.substr(prevPos + 2, pos - (prevPos + 2));
 
-					cout << info << endl;
+					//cout << info << endl;
 
 					//Get the information needed to make the user object
 					if (counter == 2) {

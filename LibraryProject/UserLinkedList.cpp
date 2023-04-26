@@ -5,8 +5,7 @@ using namespace std;
 #include "UserNode.h"
 #include <vector>
 
-//NEW FUNCTION
-
+//Returns the user with the given libraryID from the userLinkedList
 User UserLinkedList::getUser(int id) {
 	UserLinkedList results;
 	User u;
@@ -303,9 +302,7 @@ bool UserLinkedList::isValidLogin(int ID, string password) {
 			User tempU = temp->data;
 			//Find the user with the same ID
 			if (ID == tempU.getLibraryID()) {
-				cout << "matched id" << endl;
 				if (password == tempU.getPassword()) {
-					cout << "matched password" << endl;
 					return true;
 				}
 			}
