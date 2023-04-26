@@ -1,25 +1,22 @@
 #pragma once
 #ifndef books_h
 #define books_h
-
+#include "Inventory.h"
 #include <string>
 using namespace std;
 
-class Books {
+class Books : public Inventory {
 private:
 	string author;
 	string title;
-	string publisher;
 	int edition;
 	int ISBN;
-	string publisherEmail;
-	string publisherAddress;
 	double price;
 public:
 
 	Books();
 
-	Books(string author, string title, string publisher, int edition, int ISBN, string publisherEmail, string publisherAddress, double price);
+	Books(string author, string title, int edition, int ISBN, double price);
 
 	~Books();
 
