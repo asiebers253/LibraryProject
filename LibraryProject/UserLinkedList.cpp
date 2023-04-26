@@ -5,6 +5,31 @@ using namespace std;
 #include "UserNode.h"
 #include <vector>
 
+//NEW FUNCTION
+
+User UserLinkedList::getUser(int id) {
+	UserLinkedList results;
+	User u;
+	if (head != NULL) {
+		UserNode* temp = head;
+		User tempU;
+		int counter = 0;
+		while (temp != NULL) {
+			tempU = temp->data;
+
+			if (id == tempU.getLibraryID()) {
+				return tempU;
+			}
+			temp = temp->next;
+		}
+		if (counter == 0) {
+			return u;
+		}
+	}
+	return u;
+	
+}
+
 //Adds a user to the end of the linked list
 void UserLinkedList::addUser(User u) {
 	UserNode* newnode = new UserNode();
@@ -21,6 +46,7 @@ void UserLinkedList::addUser(User u) {
 		}
 		temp->next = newnode;
 	}
+	totalUsers++;
 }
 
 //Removes a user from the linked list
@@ -39,6 +65,7 @@ void UserLinkedList::removeUser(User u) {
 			prevNode = currNode;
 			currNode = currNode->next;
 		}
+		totalUsers--;
 	}
 }
 
@@ -276,8 +303,11 @@ bool UserLinkedList::isValidLogin(int ID, string password) {
 			User tempU = temp->data;
 			//Find the user with the same ID
 			if (ID == tempU.getLibraryID()) {
-				//Check if the password entered is the same as the User's password
-				return tempU.isValidLogin(password);
+				cout << "matched id" << endl;
+				if (password == tempU.getPassword()) {
+					cout << "matched password" << endl;
+					return true;
+				}
 			}
 			temp = temp->next;
 		}
@@ -287,16 +317,20 @@ bool UserLinkedList::isValidLogin(int ID, string password) {
 
 
 //Used to register new users in our library system
-void UserLinkedList::registerUser(string fn, string ln, string a, string pN, string e, string p, int instID, bool donor) {
+//NEED TO MODIFY!!
+/*
+User UserLinkedList::registerUser(string fn, string ln, string a, string pN, string e, string p, int instID, bool donor) {
 	User u(fn, ln, a, pN, e, p, instID, donor);
 
 	//instID should have 8 numbers
 	//having 5 in front means their id is a student id
 	//having 6 in front means they are are an admin
+	/*
 	int val = instID / 60000000;
 	if (val == 1) {
 		u.setIsAdmin(true);
 	}
+	
 
 	//Creates a library ID (which is 8 numbers long)
 	int id = 0;
@@ -305,18 +339,20 @@ void UserLinkedList::registerUser(string fn, string ln, string a, string pN, str
 	}
 	u.setLibraryID(id);
 	addUser(u);
-}
+	return u;
+}*/
 
 //Creates and returns a valid libraryID
+//move to user class?
 int UserLinkedList::generateLibraryID() {
 	int id, upperBound, lowerBound;
 
 	do {
-		srand(time(0));
+		srand((unsigned) time(0));
 		upperBound = 50000000;
 		lowerBound = 40000000;
 		id = ((rand() % (upperBound - lowerBound + 1)) + lowerBound);
-	} while (isLibraryIDUsed(l) && l < upperBound && l > lowerBound);
+	} while (isLibraryIDUsed(id) && id < upperBound && id > lowerBound);
 
 	return id;
 }

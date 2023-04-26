@@ -128,20 +128,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Books.cpp" />
+    <ClCompile Include="Employee.cpp" />
     <ClCompile Include="Menus.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Student.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="UserFile.cpp" />
     <ClCompile Include="UserLinkedList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Books.h" />
+    <ClInclude Include="Employee.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Journals.h" />
     <ClInclude Include="Menus.h" />
     <ClInclude Include="Newspapers.h" />
     <ClInclude Include="Periodicals.h" />
     <ClInclude Include="Publisher.h" />
+    <ClInclude Include="Student.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="UserFile.h" />
     <ClInclude Include="UserLinkedList.h" />

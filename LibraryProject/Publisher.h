@@ -10,9 +10,9 @@ private:
 	string publisherEmail;
 	string publisherAddress;
 public:
-	Publisher();
+	Publisher() {};
 	Publisher(string publisherName, string publisherEmail, string publisherAddress);
-	~Publisher();
+	~Publisher() {};
 
 	string getPublisherName();
 	string getPublisherEmail();

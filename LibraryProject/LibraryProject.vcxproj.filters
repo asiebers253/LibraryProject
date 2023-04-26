@@ -33,6 +33,12 @@
     <ClCompile Include="UserFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Employee.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Student.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Menus.h">
@@ -51,6 +57,27 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UserFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Journals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Newspapers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Periodicals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Publisher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Employee.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Student.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

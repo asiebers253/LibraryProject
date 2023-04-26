@@ -8,8 +8,8 @@ using namespace std;
 class Inventory {
 public:
 	Inventory(Publisher publisher) : publisher(publisher) {}
-	Inventory();
-	~Inventory();
+	Inventory() {};
+	~Inventory() {};
 protected:
 	Publisher publisher;
 };
