@@ -7,7 +7,7 @@ using namespace std;
 
 //Returns the user with the given libraryID from the userLinkedList
 User UserLinkedList::getUser(int id) {
-	UserLinkedList results;
+	//UserLinkedList results;
 	User u;
 	if (head != NULL) {
 		UserNode* temp = head;
@@ -26,7 +26,6 @@ User UserLinkedList::getUser(int id) {
 		}
 	}
 	return u;
-	
 }
 
 //Adds a user to the end of the linked list

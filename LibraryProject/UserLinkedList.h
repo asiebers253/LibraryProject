@@ -17,7 +17,7 @@ public:
 	~UserLinkedList() {}
 
 	//Finding and Modifying Users
-	User registerUser(string, string, string, string, string, string, int, bool);
+	//User registerUser(string, string, string, string, string, string, int, bool);
 	void addUser(User u);
 	void removeUser(User u);
 	User getUserAt(int index);
@@ -39,7 +39,7 @@ public:
 	int generateLibraryID();
 	bool isLibraryIDUsed(int);
 	UserNode* getHead() { return head;}
-	void test();
+	//void test();
 	int getTotalUsers() { return totalUsers; }
 };
 

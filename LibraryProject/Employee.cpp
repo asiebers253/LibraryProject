@@ -1,8 +1,17 @@
 #include "Employee.h"
 #include "User.h"
 
-Employee::Employee(string fn, string ln, string a, string pN, string e, string p, int ID, int lID, bool donor)
-	: User("Employee", fn, ln, a, pN, e, p, lID, donor), employeeID(ID) {};
+Employee::Employee(string fn, string ln, string a, string pN, string e, string p, string id, int lID, bool donor) {
+	firstName = fn;
+	lastName = ln;
+	address = a;
+	phoneNumber = pN;
+	email = e;
+	password = p;
+	institutionalID = id;
+	libraryID = lID;
+	isDonor = donor;
+}
 
 /*
 void Employee::print() {

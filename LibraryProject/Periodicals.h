@@ -10,24 +10,49 @@ private:
 	string title;
 	string date;
 	string frequency;
-	int ISBN;
-	double price;
+	string ISBN;
+	double price = 0.0;
 public:
-	Periodicals();
-	Periodicals(string title, string date, string frequency, int ISBN, double price);
-	~Periodicals();
+	Periodicals() {};
+	Periodicals(string title, string date, string frequency, string ISBN, double price) {
+		this->title = title;
+		this->date = date;
+		this->frequency = frequency;
+		this->ISBN = ISBN;
+		this->price = price;
+	
+	};
+	~Periodicals() {};
 
-	void setTitle(string t);
-	void setDate(string d);
-	void setFrequency(string f);
-	void setISBN(int ISBN);
-	void setPrice(double price);
+	void setTitle(string t) {
+		title = t;
+	}
+	void setDate(string d) {
+		date = d;
+	}
+	void setFrequency(string f) {
+		frequency = f;
+	}
+	void setISBN(string ISBN) {
+		this->ISBN = ISBN;
+	}
+	void setPrice(double p) {
+		price = p;
+	}
 
-	string getTitle();
-	string getDate();
-	string getFrequency();
-	int getISBN();
-	double getPrice();
+	string getTitle() {
+		return title;
+	}
+	string getDate() {
+		return date;
+	}
+	string getFrequency() {
+		return frequency;
+	}
+	string getISBN() { return ISBN; };
+	double getPrice() {
+		return price;
+	}
 };
 
 #endif

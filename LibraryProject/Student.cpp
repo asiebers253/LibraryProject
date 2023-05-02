@@ -30,11 +30,3 @@ void Student::print() {
 	cout << endl;
 }*/
 
-bool Student::isEqual(Student s) {
-	if (studentID == s.getID()) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}

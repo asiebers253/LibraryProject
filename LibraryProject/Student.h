@@ -4,17 +4,22 @@
 
 #include "User.h"
 class Student : public User {
-private:
-	int studentID;
 public:
-	Student(string fn, string ln, string a, string pN, string e, string p, int stuID, int lID, bool donor)
-		: User("Student", fn, ln, a, pN, e, p, lID, donor), studentID(stuID) {};
-	Student() { studentID = 0; };
+	Student(string fn, string ln, string a, string pN, string e, string p, string id, int lID, bool donor) {
+		firstName = fn;
+		lastName = ln;
+		address = a;
+		phoneNumber = pN;
+		email = e;
+		password = p;
+		institutionalID = id;
+		libraryID = lID;
+		isDonor = donor;
+	}
+	//Student() { studentID = 0; };
 	~Student() {};
 	//void print();
 	bool isEqual(Student s);
-	int getID() { return studentID; }
-	void setID(int id) { studentID = id; }
 };
 
 #endif

@@ -6,20 +6,32 @@ using namespace std;
 
 class Publisher {
 private: 
+	string id;
 	string publisherName;
 	string publisherEmail;
 	string publisherAddress;
 public:
 	Publisher() {};
-	Publisher(string publisherName, string publisherEmail, string publisherAddress);
+	Publisher(string publisherName, string publisherEmail, string publisherAddress) {
+		this->publisherName = publisherName;
+		this->publisherEmail = publisherEmail;
+		this->publisherAddress = publisherAddress;
+	}
 	~Publisher() {};
 
-	string getPublisherName();
-	string getPublisherEmail();
-	string getPublisherAddress();
-	void setPublisherName(string pn);
-	void setPublisherEmail(string pe);
-	void setPublisherAddress(string pa);
+	string getPublisherName() { return publisherName; }
+	string getPublisherEmail() { return publisherEmail; }
+	string getPublisherAddress() { return publisherAddress; }
+	void setPublisherName(string pn) {
+		publisherName = pn;
+	}
+	void setPublisherEmail(string pe) {
+		publisherEmail = pe;
+	}
+	void setPublisherAddress(string pa) {
+		publisherAddress = pa;
+	}
+	string getID() { return id; };
 };
 
 #endif

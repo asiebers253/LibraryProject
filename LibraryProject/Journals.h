@@ -7,35 +7,41 @@ using namespace std;
 
 class Journals : public Inventory {
 private:
-	string author;
-	string title;
-	int edition;
-	int ISBN;
-	double price;
+	string author = "";
+	string title = "";
+	int edition = 0;
+	string ISBN = "";
+	double price = 0.0;
 public:
-	Journals();
-	Journals(string author, string title, int edition, int ISBN, double price);
-	~Journals();
+	Journals() {};
+	Journals(string author, string title, int edition, string ISBN, double price) {
+		this->author = author;
+		this->title = title;
+		this->edition = edition;
+		this->ISBN = ISBN;
+		this->price = price;
+	}
+	//~Journals();
 
-	string GetAuthor() {}
+	string GetAuthor() { return author; }
 
-	void SetAuthor(string a) {}
+	void SetAuthor(string a) { author = a; }
 
-	string GetTitle() {}
+	string GetTitle() { return title; }
 
-	void SetTitle(string t) {}
+	void SetTitle(string t) { title = t; }
 
-	int GetISBN() {}
+	string GetISBN() { return ISBN; }
 
-	void SetISBN(int i) {}
+	void SetISBN(string i) { ISBN = i; }
 
-	int GetEdition() {}
+	int GetEdition() { return edition; }
 
-	void SetEdition(int e) {}
+	void SetEdition(int e) { edition = e; }
 
-	double GetPrice() {}
+	double GetPrice() { return price; }
 
-	void SetPrice(double pr) {}
+	void SetPrice(double pr) { price = pr; }
 };
 
 #endif

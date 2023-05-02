@@ -9,16 +9,20 @@ using namespace std;
 
 //add a fee variable? and also a fee class?
 
+
+//ASK TEACHER ABOUT STORING USERS
+
+
 class User
 {
 protected:
-	string type; //either Student or Employee
 	string firstName;
 	string lastName;
 	string address;
 	string phoneNumber;
 	string email;
 	string password;
+	string institutionalID;
 	int libraryID;
 	bool isDonor;
 	vector<Books> borrowedBooks;
@@ -27,7 +31,7 @@ public:
 	//Default Constructor
 	User();
 	//Parametric Constructor
-	User(string type, string firstName, string lastName, string address, string phoneNumber, string email, string password, int libraryID, bool isDonor);
+	User(string firstName, string lastName, string address, string phoneNumber, string email, string password, string institutionalID, int libraryID, bool isDonor);
 	//Copy Constructor
 	User(const User& u);
 
@@ -44,14 +48,15 @@ public:
 	void setEmail(string e);
 	string getPassword() const;
 	void setPassword(string p);
+	string getInstitutionalID() const;
+	void setInstitutionalID(string instID);
 	int getLibraryID() const;
 	void setLibraryID(int lID);
 	bool getIsDonor() const;
 	void setIsDonor(bool d);
 	vector<Books> getBorrowedBooks() const;
 	void setBorrowedBooks(vector<Books> books);
-	void setType(string t) { type = t; }
-	string getType() { return type; }
+	
 
 	//Other Functions
 	bool isValidLogin(string pwd);
@@ -67,7 +72,7 @@ public:
 		cout << " Address: " << address << endl;
 		cout << " Phone Number: " << phoneNumber << endl;
 		cout << " Email: " << email << endl;
-		//cout << " Institution ID: " << employeeID << endl;
+		cout << " Institution ID: " << institutionalID << endl;
 		cout << " Library ID: " << libraryID << endl;
 		cout << " Are they a donator to the library? ";
 		if (isDonor) {

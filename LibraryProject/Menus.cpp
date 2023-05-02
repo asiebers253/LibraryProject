@@ -3,21 +3,100 @@
 #include <iomanip>
 #include <string.h>
 #include <sstream>
-#include "UserFile.h"
+#include "Student.h"
+#include "Employee.h"
+#include "ManageFiles.h"
 using namespace std;
 
-//generally things are working as expected, but the code needs to be cleaned up a bit
 
-//functions for logging in and for creating a new user seem to work, but the how it prints out should be cleaned up
+//NOT DONE
+/*
+void Menus::searchBooks() {
+	menuName("Book Search Menu");
+	
+	//this would in theory hold all of the book-type object in the program
+	vector<Inventory> i;
+
+	vector<string> options{"Search by title", "Search by Author(s)", "Search by publisher", "search by keyword"};
+	printOptions(options);
+	int choice = getInput();
+	while (choice == 0) {
+		cout << "please chose a valid option" << endl;
+		choice = getInput();
+	}
+	if (choice == -1) {
+		return;
+	}
+
+	cout << " What would you like to search for?" << endl;
+	string input;
+	cin >> input;
+	cout << endl;
+
+	switch (choice) {
+	case 1:
+		results = users.searchByName(input);
+		break;
+	case 2:
+		results = users.searchByAddress(input);
+		break;
+	case 3:
+		results = users.searchByPhoneNumber(input);
+		break;
+	case 4:
+		results = users.searchByEmail(input);
+		break;
+	case 5:
+		results = users.searchByKeyword(input);
+		break;
+	}
+
+	cout << endl;
+	//add a thing where if empty, don't run look at search
+	lookAtUserSearchResults(results);
+}
+*/
+
+//NOT DONE
+/*
+void Menus::searchBooksAdmin() {
+	menuName("Book Search Menu");
+
+	//this would in theory hold all of the book-type object in the program
+	vector<Inventory> i;
+
+	vector<string> options{ "Search by title", "Search by author(s)", "Search by publisher", "search by price", "search by keyword" };
+	printOptions(options);
+	int choice = getInput();
+	if (choice == 0) {
+		cout << "please put in a valid option" << endl;
+		choice = getInput();
+	}
+	if (choice == -1) {
+		return;
+	}
+
+	cout << " What would you like to search? ";
+	string str;
+	cin >> str;
+
+	switch (choice) {
+	case 1:
+	case 2:
+	case 3:
+	case 4:
+	case 5:
+	}
+
+}*/
 
 Menus::Menus() {
-	//cout << "in menus" << endl;
-	UserFile uf;
-	users = uf.loadUsers();
-	//users.printAllUsers();
-	//users.getUserAt(2).print();
-	main();
-	//uf.saveUsers(users);
+	ManageFiles files;
+	files.load(publishers, books, journals, newspapers, periodicals, users);
+
+	//do things
+
+	files.saveAll(books, journals, newspapers, periodicals, users);
 }
 
 void Menus::searchUsers() {
@@ -88,8 +167,6 @@ void Menus::viewUser(User u) {
 }
 
 
-
-
 //This is the starting menu for the program
 //This gives the user the option to login, create a user account, or exit the program
 void Menus::main() {
@@ -105,7 +182,11 @@ void Menus::main() {
 			break;
 		case 2:
 			//Bring the user to the register menu
-			createUser();
+			//createUser();
+			break;
+		case 3:
+			//Lets a guest user view the books in the library
+			//searchBooks();
 			break;
 		default:
 			//The user input an invalid option
@@ -143,7 +224,7 @@ int Menus::getInt(string question) {
 }
 
 //Prints out the current info for a user that is being created
-void Menus::printCheckInfo(string fn, string ln, string a, string pN, string e, string p, int id, bool donor) {
+void Menus::printCheckInfo(string fn, string ln, string a, string pN, string e, string p, int id, bool donor, string type) {
 	cout << " Is this information correct?" << endl;
 	cout << " First Name: " << fn << "   Last Name: " << ln << endl;
 	cout << " Address: " << a << endl;
@@ -158,13 +239,15 @@ void Menus::printCheckInfo(string fn, string ln, string a, string pN, string e, 
 		cout << "No" << endl;
 	}
 	cout << "Password: " << p << endl;
+	cout << "User is a " << type << endl;
 }
 
+/*
 //Takes input from the user and create a new user account
 //Are you a student or an employee?
 void Menus::createUser() {
 	User u;
-	string firstName, lastName, address, phoneNumber, email, password, strInstID = "-1", strDonorStatus;
+	string firstName, lastName, address, phoneNumber, email, password, strInstID = "-1", strDonorStatus, type;
 	int instID;
 	bool donorStatus;
 	
@@ -179,7 +262,7 @@ void Menus::createUser() {
 	lastName = getString("What is your last name?");
 	if (lastName == "-1") { return; }
 	cin.ignore(); //clears cin so that getline works properly
-	cout << " What is your address? " << endl;
+	cout << " What is your address? ";
 	getline(cin, address);
 	cout << endl;
 	if (address == "-1") { return; }
@@ -211,22 +294,42 @@ void Menus::createUser() {
 	}
 	cout << endl;
 
-	printCheckInfo(firstName, lastName, address, phoneNumber, email, password, instID, donorStatus);
+	type = getString("Are you a student?");
+	if (type == "-1") {
+		return;
+	}
+	else if (type == "Yes" || type == "yes") {
+		type = "Student";
+	}
+	else {
+		type = "Employee";
+	}
+	cout << endl;
+
+	//add if student or employee to check info
+	printCheckInfo(firstName, lastName, address, phoneNumber, email, password, instID, donorStatus, type);
 
 	vector<string> options{ "Yes", "No", "Exit" };
-	vector<string> changeOptions{ "First Name", "Last Name", "Address", "Phone Number", "Email", "Password", "Institution ID", "Donor Status", "Exit" };
+	vector<string> changeOptions{ "First Name", "Last Name", "Address", "Phone Number", "Email", "Password", "Institution ID", "Donor Status", "User Type", "Exit" };
 	int username;
 	printOptions(options);
 	int outerChoice = getInput(), innerChoice = 0;
 
 
-	//add thing to exit to the outer cases
+	//add thing to exit to the outer case
 	while (outerChoice != -1) {
 		switch (outerChoice) {
 		case 1:
-			//User u();
-			//users.addUser(u);
 			username = users.generateLibraryID();
+			if (type == "Student" || type == "student") {
+				Student st(firstName, lastName, address, phoneNumber, email, password, instID, username, donorStatus);
+				users.addUser(st);
+			}
+			else {
+				Employee em(firstName, lastName, address, phoneNumber, email, password, instID, username, donorStatus);
+				users.addUser(em);
+			}
+			
 			cout << "Thank you for making an account!" << endl;
 			cout << "Please remember the following information in order to login" << endl;
 			cout << "Username: " << username << endl;
@@ -294,7 +397,21 @@ void Menus::createUser() {
 					}
 					cout << endl;
 					break;
+				case 9:
+					type = getString("Are you a student?");
+					if (type == "-1") {
+						return;
+					}
+					else if (type == "Yes" || type == "yes") {
+						type = "Student";
+					}
+					else {
+						type = "Employee";
+					}
+					cout << endl;
+					break;
 				}
+
 				if (innerChoice != -1) {
 				cout << "Is there anything else you would like to change?" << endl;
 				printOptions(changeOptions);
@@ -302,24 +419,25 @@ void Menus::createUser() {
 				}
 			}
 
-			break;
+			
 		default:
 			//The user input an invalid option
 			cout << "Please enter a valid option." << endl;
 			outerChoice = getInput();
 		}
 		
-		printCheckInfo(firstName, lastName, address, phoneNumber, email, password, instID, donorStatus);
+		printCheckInfo(firstName, lastName, address, phoneNumber, email, password, instID, donorStatus, type);
 		printOptions(options);
 		outerChoice = getInput();
 	}
 
 }
+*/
 
 //Sets up the title and options for the main menu
 //Also gets what option the user would like to select
 void Menus::setupMain() {
-	vector<string> options{ "Login", "Create Account", "Exit" };
+	vector<string> options{ "Login", "Create Account", "View Books", "Exit" };
 	menuName("Welcome to the Cofrin Library!");
 	printOptions(options);
 }

@@ -127,27 +127,42 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BookLinkedList.cpp" />
     <ClCompile Include="Books.cpp" />
     <ClCompile Include="Employee.cpp" />
+    <ClCompile Include="JournalLinkedList.cpp" />
     <ClCompile Include="Menus.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="NewspaperLinkedList.cpp" />
+    <ClCompile Include="PeriodicalLinkedList.cpp" />
+    <ClCompile Include="PublisherLinkedList.cpp" />
     <ClCompile Include="Student.cpp" />
     <ClCompile Include="User.cpp" />
-    <ClCompile Include="UserFile.cpp" />
+    <ClCompile Include="ManageFiles.cpp" />
     <ClCompile Include="UserLinkedList.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BookLinkedList.h" />
     <ClInclude Include="Books.h" />
+    <ClInclude Include="BookNode.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="Inventory.h" />
+    <ClInclude Include="JournalLinkedList.h" />
+    <ClInclude Include="JournalNode.h" />
     <ClInclude Include="Journals.h" />
     <ClInclude Include="Menus.h" />
+    <ClInclude Include="NewspaperLinkedList.h" />
+    <ClInclude Include="NewspaperNode.h" />
     <ClInclude Include="Newspapers.h" />
+    <ClInclude Include="PeriodicalLinkedList.h" />
+    <ClInclude Include="PeriodicalNode.h" />
     <ClInclude Include="Periodicals.h" />
     <ClInclude Include="Publisher.h" />
+    <ClInclude Include="PublisherLinkedList.h" />
+    <ClInclude Include="PublisherNode.h" />
     <ClInclude Include="Student.h" />
     <ClInclude Include="User.h" />
-    <ClInclude Include="UserFile.h" />
+    <ClInclude Include="ManageFiles.h" />
     <ClInclude Include="UserLinkedList.h" />
     <ClInclude Include="UserNode.h" />
   </ItemGroup>

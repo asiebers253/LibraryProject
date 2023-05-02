@@ -10,13 +10,15 @@ private:
 	string author;
 	string title;
 	int edition;
-	int ISBN;
+	string genre;
+	string ISBN;
 	double price;
+	Publisher publisher;
 public:
 
 	Books();
 
-	Books(string author, string title, int edition, int ISBN, double price);
+	Books(string author, string title, int edition, string genre, string ISBN, double price, Publisher p);
 
 	~Books();
 
@@ -28,21 +30,23 @@ public:
 
 	void SetTitle(string t);
 
-	string GetPublisher();
+	string GetPublisherEmail() { return publisher.getPublisherEmail(); }
 
-	void SetPublisher(string p);
+	void SetPublisherEmail(string pe) {
+		publisher.setPublisherEmail(pe);
+	}
 
-	string GetPublisherEmail();
+	string GetPublisherAddress() {
+		return publisher.getPublisherAddress();
+	}
 
-	void SetPublisherEmail(string pe);
+	void SetPublisherAddress(string pa) {
+		publisher.setPublisherAddress(pa);
+	}
 
-	string GetPublisherAddress();
+	string GetISBN();
 
-	void SetPublisherAddress(string pa);
-
-	int GetISBN();
-
-	void SetISBN(int i);
+	void SetISBN(string i);
 
 	int GetEdition();
 
@@ -51,6 +55,14 @@ public:
 	double GetPrice();
 
 	void SetPrice(double pr);
+
+	string GetGenre() { return genre; };
+	void SetGenre(string g) { genre = g; };
+
+	Publisher GetPublisher() { return publisher; };
+	void SetPublisher(Publisher p) { publisher = p; }
+
+
 
 };
 
