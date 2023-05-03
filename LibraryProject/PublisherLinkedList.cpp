@@ -1,6 +1,16 @@
+//Made by Alanna Siebers
 #include "PublisherLinkedList.h"
-#include "Publisher.h"
 #include "PublisherNode.h"
+#include "Publisher.h"
+
+//Default Constructor
+//PublisherLinkedList::PublisherLinkedList() { head == NULL; };
+
+//Copy Constructor
+PublisherLinkedList::PublisherLinkedList(const PublisherLinkedList& publishers) : head(publishers.head) {}
+
+//Deconstructor
+PublisherLinkedList::~PublisherLinkedList() {}
 
 void PublisherLinkedList::addPublisher(Publisher p) {
 	PublisherNode* newnode = new PublisherNode();

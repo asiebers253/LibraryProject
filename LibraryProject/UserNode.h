@@ -1,3 +1,4 @@
+//Made by Alanna Siebers
 #pragma once
 #ifndef UserNode_H
 #define UserNode_H

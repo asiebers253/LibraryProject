@@ -1,3 +1,4 @@
+//Made by Alanna Siebers
 #pragma once
 #ifndef USER_H
 #define USER_H
@@ -5,13 +6,10 @@
 #include <cstring>
 #include <vector>
 #include "Books.h"
+#include "BorrowedBook.h"
 using namespace std;
 
 //add a fee variable? and also a fee class?
-
-
-//ASK TEACHER ABOUT STORING USERS
-
 
 class User
 {
@@ -23,15 +21,17 @@ protected:
 	string email;
 	string password;
 	string institutionalID;
+	double fines = 0;
 	int libraryID;
 	bool isDonor;
-	vector<Books> borrowedBooks;
+	//vector<Books> books;
+	vector<BorrowedBook> bb;
 
 public:
 	//Default Constructor
 	User();
-	//Parametric Constructor
-	User(string firstName, string lastName, string address, string phoneNumber, string email, string password, string institutionalID, int libraryID, bool isDonor);
+	//Parametric Constructors
+	User(string fn, string ln, string a, string pN, string e, string p, string instID, int libID, bool donor);
 	//Copy Constructor
 	User(const User& u);
 
@@ -54,8 +54,8 @@ public:
 	void setLibraryID(int lID);
 	bool getIsDonor() const;
 	void setIsDonor(bool d);
-	vector<Books> getBorrowedBooks() const;
-	void setBorrowedBooks(vector<Books> books);
+	vector<BorrowedBook> getBorrowedBooks() const;
+	void setBorrowedBooks(vector<BorrowedBook> books);
 	
 
 	//Other Functions
@@ -74,6 +74,7 @@ public:
 		cout << " Email: " << email << endl;
 		cout << " Institution ID: " << institutionalID << endl;
 		cout << " Library ID: " << libraryID << endl;
+		cout << " Current Fines: " << fines << endl;
 		cout << " Are they a donator to the library? ";
 		if (isDonor) {
 			cout << "Yes" << endl;
@@ -81,20 +82,23 @@ public:
 		else {
 			cout << "No" << endl;
 		}
-		if (borrowedBooks.empty()) {
+		if (bb.empty()) {
 			cout << " This user is not currently borrowing any books." << endl;
 		}
 		else {
 			cout << " Currently borrowed books: " << endl;
 			string books = " ";
-			for (Books b : borrowedBooks) {
-				books += b.GetTitle() + ", ";
+			for (BorrowedBook b : bb) {
+				books += b.getBook().GetTitle() + ", ";
 			}
 			books = books.substr(0, books.length() - 2);
 			cout << books << endl;
 		}
 		cout << endl;
 	}
+
+
+	void returnBook(Inventory i);
 };
 
 #endif

@@ -1,3 +1,4 @@
+//Made by Alanna Siebers
 #pragma once
 #ifndef PeriodicalLinkedList_H
 #define PeriodicalLinkedList_H

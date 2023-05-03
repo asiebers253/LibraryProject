@@ -1,9 +1,13 @@
+//Made by Alanna Siebers
 #include "User.h"
 #include <iostream>
 #include <cstring>
 #include <vector>
 #include "Books.h"
+#include "BorrowedBook.h"
 using namespace std;
+
+
 
 //Default Constructor (Creates an "blank" user);
 User::User() {
@@ -17,11 +21,12 @@ User::User() {
 	institutionalID = "None";
 	libraryID = 0;
 	isDonor = false;
-	vector<Books> empty;
-	borrowedBooks = empty;
+	vector<BorrowedBook> empty;
+	bb = empty;
 }
 
-//Parametric Constructor (Used by Student and Employee classes)
+
+//Parametric Constructors 
 User::User(string fn, string ln, string a, string pN, string e, string p, string instID, int libID, bool donor) {
 	firstName = fn;
 	lastName = ln;
@@ -32,13 +37,13 @@ User::User(string fn, string ln, string a, string pN, string e, string p, string
 	institutionalID = instID;
 	libraryID = libID;
 	isDonor = donor;
-	vector<Books> empty;
-	borrowedBooks = empty;
+	vector<BorrowedBook> empty;
+	bb = empty;
 }
 
 //Copy Constructor
 User::User(const User& u) : firstName(u.firstName), lastName(u.lastName), address(u.address), phoneNumber(u.phoneNumber), email(u.email), 
-password(u.password), institutionalID(u.institutionalID), libraryID(u.libraryID), isDonor(u.isDonor), borrowedBooks(u.borrowedBooks) {}
+password(u.password), institutionalID(u.institutionalID), libraryID(u.libraryID), isDonor(u.isDonor), bb(u.bb) {}
 
 //Getter Functions
 string User::getFirstName() const { return firstName; }
@@ -50,7 +55,7 @@ string User::getPassword() const { return password; }
 string User::getInstitutionalID() const { return institutionalID; }
 int User::getLibraryID() const { return libraryID; }
 bool User::getIsDonor() const { return isDonor; }
-vector<Books> User::getBorrowedBooks() const { return borrowedBooks; }
+vector<BorrowedBook> User::getBorrowedBooks() const { return bb; }
 
 //Setter Functions
 void User::setFirstName(string fn) { firstName = fn; }
@@ -62,7 +67,7 @@ void User::setPassword(string p) { password = p; }
 void User::setInstitutionalID(string instID) { institutionalID = instID; }
 void User::setLibraryID(int lID) { libraryID = lID; }
 void User::setIsDonor(bool d) { isDonor = d; }
-void User::setBorrowedBooks(vector<Books> bks) { borrowedBooks = bks; }
+void User::setBorrowedBooks(vector<BorrowedBook> bks) { bb = bks; }
 
 //Checks if a login attempt was successful
 bool User::isValidLogin(string pwd) {
@@ -74,5 +79,22 @@ bool User::isValidLogin(string pwd) {
 
 //Add a book to the user's vector of borrowed books
 void User::borrowBook(Books b) {
-	borrowedBooks.push_back(b);
+	BorrowedBook B(b);
+	bb.push_back(B);
+	b.subtractQuantity();
+}
+
+void User::returnBook(Inventory i) {
+	int count = 0;
+	for (int j = 0; j < bb.size(); j++) {
+		if (i.GetISBN() == bb.at(j).getBook().GetISBN()) {
+			break;
+		}
+		count++;
+	}
+	BorrowedBook b = bb.at(count);
+	b.getBook().addQuantity();
+	fines = b.calculateFines();
+
+	bb.erase(bb.begin() + count);
 }

@@ -1,3 +1,4 @@
+//Made by Alanna Siebers
 #pragma once
 #ifndef UserLinkedList_H
 #define UserLinkedList_H
@@ -17,7 +18,7 @@ public:
 	~UserLinkedList() {}
 
 	//Finding and Modifying Users
-	//User registerUser(string, string, string, string, string, string, int, bool);
+	User registerUser(string, string, string, string, string, string, string, bool);
 	void addUser(User u);
 	void removeUser(User u);
 	User getUserAt(int index);

@@ -20,6 +20,7 @@ public:
 	~Student() {};
 	//void print();
 	bool isEqual(Student s);
+	
 };
 
 #endif

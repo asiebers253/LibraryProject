@@ -1,7 +1,7 @@
+//Made by Alanna Siebers
 #pragma once
 #ifndef Userfile_H
 #define Userfile_H
-
 #include <vector>
 #include "UserLinkedList.h"
 #include "PublisherLinkedList.h"

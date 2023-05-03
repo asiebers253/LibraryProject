@@ -1,3 +1,4 @@
+//Made by Alanna Siebers
 #pragma once
 #ifndef BookNode_H
 #define BookNode_H

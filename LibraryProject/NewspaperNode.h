@@ -1,3 +1,4 @@
+//Made by Alanna Siebers
 #pragma once
 #ifndef NewspaperNode_H
 #define NewspaperNode_H

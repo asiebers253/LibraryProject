@@ -314,32 +314,18 @@ bool UserLinkedList::isValidLogin(int ID, string password) {
 
 //Used to register new users in our library system
 //NEED TO MODIFY!!
+
+//DO NOT NEED
 /*
-User UserLinkedList::registerUser(string fn, string ln, string a, string pN, string e, string p, int instID, bool donor) {
-	User u(fn, ln, a, pN, e, p, instID, donor);
-
-	//instID should have 8 numbers
-	//having 5 in front means their id is a student id
-	//having 6 in front means they are are an admin
-	/*
-	int val = instID / 60000000;
-	if (val == 1) {
-		u.setIsAdmin(true);
-	}
-	
-
-	//Creates a library ID (which is 8 numbers long)
-	int id = 0;
-	while (id == 0 || isLibraryIDUsed(id)) {
-		id = generateLibraryID();
-	}
-	u.setLibraryID(id);
+User UserLinkedList::registerUser(string fn, string ln, string a, string pN, string e, string p, string instID, bool donor) {
+	int libID = generateLibraryID();
+	User u
 	addUser(u);
 	return u;
-}*/
+}
+*/
 
 //Creates and returns a valid libraryID
-//move to user class?
 int UserLinkedList::generateLibraryID() {
 	int id, upperBound, lowerBound;
 

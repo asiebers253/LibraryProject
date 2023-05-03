@@ -1,3 +1,4 @@
+//Made by Alanna Siebers
 #pragma once
 #ifndef NewspaperLinkedList_H
 #define NewspaperLinkedList_H

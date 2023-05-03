@@ -1,3 +1,4 @@
+//Made by Alanna Siebers
 #pragma once
 #ifndef BookLinkedList_H
 #define BookLinkedList_H
@@ -6,6 +7,7 @@
 class BookLinkedList {
 private:
 	BookNode* head;
+	int size = 0;
 	string doubleToString(double d);
 public:
 	//Default Constructor
@@ -22,6 +24,7 @@ public:
 	void remove(string ISBN);
 	Books get(string ISBN);
 	Books getAt(int index);
+	int getSize() { return size; };
 
 	//Search Functions
 	BookLinkedList searchByAuthor(string a);

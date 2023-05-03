@@ -1,14 +1,13 @@
+//Made by Alanna Siebers
 #pragma once
 #ifndef MENUS_H
 #define MENUS_H
-#endif
 #include "UserLinkedList.h"
 #include "BookLinkedList.h"
 #include "JournalLinkedList.h"
 #include "NewspaperLinkedList.h"
 #include "PeriodicalLinkedList.h"
 #include "PublisherLinkedList.h"
-
 
 class Menus {
 private:
@@ -19,6 +18,10 @@ private:
 	PeriodicalLinkedList periodicals;
 	PublisherLinkedList publishers;
 
+	void bookSearchResults(BookLinkedList results, int num, User &u);
+
+	void userView(Books b, User& u);
+	void userViewOptions(Books b, User& u);
 
 	void main();
 
@@ -32,6 +35,7 @@ private:
 	void printOptions(vector<string> options);
 	int strToInt(string str);
 	void setupMain();
+	void guestViewPurchase(int quantity);
 	
 	//Functions accessed by the main function
 	void login();
@@ -44,10 +48,16 @@ private:
 	//void standardUserMenu();
 	//void adminMenu();
 
-	void adminMain(int username);
+	void adminMain(User u);
 	void searchUsers();
 	void lookAtUserSearchResults(UserLinkedList results);
 	void viewUser(User u);
+	void standardMain(User u);
+	
+	void guestView(Books b);
+	void guestView(Journals j);
+	void guestView(Periodicals p);
+	void guestView(Newspapers n);
 
 	//void searchBooks();
 	//void searchBooksAdmin();
@@ -56,3 +66,4 @@ public:
 	Menus();
 };
 
+#endif

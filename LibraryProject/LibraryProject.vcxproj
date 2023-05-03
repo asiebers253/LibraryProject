@@ -129,6 +129,8 @@
   <ItemGroup>
     <ClCompile Include="BookLinkedList.cpp" />
     <ClCompile Include="Books.cpp" />
+    <ClCompile Include="BorrowedBook!.cpp" />
+    <ClCompile Include="BorrowedBook.cpp" />
     <ClCompile Include="Employee.cpp" />
     <ClCompile Include="JournalLinkedList.cpp" />
     <ClCompile Include="Menus.cpp" />
@@ -145,6 +147,8 @@
     <ClInclude Include="BookLinkedList.h" />
     <ClInclude Include="Books.h" />
     <ClInclude Include="BookNode.h" />
+    <ClInclude Include="BorrowedBook!.h" />
+    <ClInclude Include="BorrowedBook.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="JournalLinkedList.h" />

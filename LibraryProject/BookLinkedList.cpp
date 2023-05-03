@@ -7,15 +7,19 @@
 using namespace std;
 
 //Default Constructor
-BookLinkedList::BookLinkedList() { head = NULL; }
+BookLinkedList::BookLinkedList() { head = NULL; size = 0;}
 
 //Copy Constructor
-BookLinkedList::BookLinkedList(const BookLinkedList& books) : head(books.head) {}
+BookLinkedList::BookLinkedList(const BookLinkedList& books) {
+	head = books.head;
+	size = books.size;
+}
 
 //Deconstructor
 BookLinkedList::~BookLinkedList() {}
 
 void BookLinkedList::addBook(Books b) {
+	size++;
 	BookNode* newnode = new BookNode();
 	newnode->data = b;
 	newnode->next = NULL;
@@ -29,10 +33,12 @@ void BookLinkedList::addBook(Books b) {
 			temp = temp->next;
 		}
 		temp->next = newnode;
+		
 	}
 }
 
 void BookLinkedList::remove(string ISBN) {
+	
 	if (head == NULL) {
 		cout << "Error - no books to remove" << endl;
 	}
@@ -43,6 +49,7 @@ void BookLinkedList::remove(string ISBN) {
 			Books currBook = currNode->data;
 			if (ISBN == currBook.GetISBN()) {
 				prevNode->next = currNode->next;
+				size--;
 				break;
 			}
 			prevNode = currNode;

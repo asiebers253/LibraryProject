@@ -1,3 +1,4 @@
+//Made by Ryan Guay and Alanna Siebers
 #pragma once
 #ifndef books_h
 #define books_h
@@ -8,12 +9,10 @@ using namespace std;
 class Books : public Inventory {
 private:
 	string author;
-	string title;
 	int edition;
 	string genre;
 	string ISBN;
 	double price;
-	Publisher publisher;
 public:
 
 	Books();
@@ -62,7 +61,7 @@ public:
 	Publisher GetPublisher() { return publisher; };
 	void SetPublisher(Publisher p) { publisher = p; }
 
-
+	void print();
 
 };
 

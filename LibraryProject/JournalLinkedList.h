@@ -1,3 +1,4 @@
+//Made by Alanna Siebers
 #pragma once
 #ifndef JournalLinkedList_H
 #define JournalLinkedList_H
