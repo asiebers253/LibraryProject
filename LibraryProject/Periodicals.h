@@ -1,57 +1,40 @@
+//Made by Ryan Guay and Alanna Siebers
+#pragma once
 #ifndef PERIODICALS_H
 #define PERIODICALS_H
-
 #include "Inventory.h"
 #include <string>
+#include <iomanip>
 using namespace std;
 
 class Periodicals : public Inventory {
 private:
-	string title;
 	string date;
 	string frequency;
-	string ISBN;
-	double price = 0.0;
 public:
+	//Default Constructor
 	Periodicals() {};
-	Periodicals(string title, string date, string frequency, string ISBN, double price) {
-		this->title = title;
-		this->date = date;
-		this->frequency = frequency;
-		this->ISBN = ISBN;
-		this->price = price;
-	
-	};
+
+	//Parametric Constructor
+	Periodicals(string title, string date, string frequency, string ISBN, double price, Publisher p) 
+		: date(date), frequency(frequency), Inventory(p, title, ISBN, price) {}
+
+	//Deconstructor
 	~Periodicals() {};
 
-	void setTitle(string t) {
-		title = t;
-	}
-	void setDate(string d) {
-		date = d;
-	}
-	void setFrequency(string f) {
-		frequency = f;
-	}
-	void setISBN(string ISBN) {
-		this->ISBN = ISBN;
-	}
-	void setPrice(double p) {
-		price = p;
-	}
-
-	string getTitle() {
-		return title;
-	}
-	string getDate() {
-		return date;
-	}
-	string getFrequency() {
-		return frequency;
-	}
-	string getISBN() { return ISBN; };
-	double getPrice() {
-		return price;
+	//Getters and Setters
+	void setDate(string d) { date = d; }
+	void setFrequency(string f) { frequency = f; }
+	string getDate() { return date; }
+	string getFrequency() { return frequency; }
+	
+	//Prints out all of the relevent periodical information
+	void print() {
+		cout << "Periodical Information - " << title << endl;
+		cout << setw(40) << setfill('~') << "" << setfill(' ') << endl;
+		cout << "Date: " << date << endl;
+		cout << "Frequency: " << frequency << endl;
+		Inventory::print();
 	}
 };
 

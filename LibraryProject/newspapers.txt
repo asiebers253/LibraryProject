@@ -1,2 +1,2 @@
-The New York Times,03/12/2023,Daily,0123384839213,1.99
-The New York Times,9/2/33,Daily,1234789043287,3.12
+The New York Times,03/12/2023,Daily,123384839213,1.99,The New York Times Company,TheNewYorkTimes@gmail.com,1983 New York Street
+The New York Times,9/2/33,Daily,1234789043287,3.12,The New York Times Company,TheNewYorkTimes@gmail.com,1983 New York Street

@@ -22,6 +22,7 @@ void NewspaperLinkedList::add(Newspapers n) {
 	newnode->next = NULL;
 	if (head == NULL) {
 		head = newnode;
+		size++;
 	}
 	else {
 		NewspaperNode* temp = head;
@@ -29,6 +30,7 @@ void NewspaperLinkedList::add(Newspapers n) {
 			temp = temp->next;
 		}
 		temp->next = newnode;
+		size++;
 	}
 }
 
@@ -42,8 +44,9 @@ void NewspaperLinkedList::remove(string ISBN) {
 		NewspaperNode* currNode = head->next;
 		while (currNode != NULL) {
 			Newspapers currNewspaper = currNode->data;
-			if (ISBN == currNewspaper.getISBN()) {
+			if (ISBN == currNewspaper.GetISBN()) {
 				prevNode->next = currNode->next;
+				size--;
 				break;
 			}
 			prevNode = currNode;
@@ -59,7 +62,7 @@ Newspapers NewspaperLinkedList::get(string ISBN) {
 		Newspapers tempN;
 		while (temp != NULL) {
 			tempN = temp->data;
-			if (ISBN == tempN.getISBN()) {
+			if (ISBN == tempN.GetISBN()) {
 				return tempN;
 			}
 			temp = temp->next;
@@ -85,6 +88,25 @@ Newspapers NewspaperLinkedList::getAt(int index) {
 	}
 }
 
+//Prints out all of the newspapers in the NewspaperLinkedList
+void NewspaperLinkedList::printAll() {
+	if (head == NULL) {
+		cout << "There are no newspapers to print" << endl;
+	}
+	else {
+		NewspaperNode* temp = head;
+		int counter = 1;
+		while (temp != NULL) {
+			Newspapers tempN = temp->data;
+			cout << " [" << counter << "] " << tempN.GetTitle() << endl;
+			counter++;
+			temp = temp->next;
+		}
+		cout << endl;
+	}
+}
+
+//Searches the NewspaperLinkedList for newspapers with the given title
 NewspaperLinkedList NewspaperLinkedList::searchByTitle(string t) {
 	NewspaperLinkedList results;
 	if (head == NULL) {
@@ -95,7 +117,7 @@ NewspaperLinkedList NewspaperLinkedList::searchByTitle(string t) {
 		Newspapers tempJ;
 		while (temp != NULL) {
 			Newspapers tempN = temp->data;
-			string title = tempN.getTitle();
+			string title = tempN.GetTitle();
 			if (title.find(t) != string::npos) {
 				results.add(tempN);
 			}
@@ -105,6 +127,7 @@ NewspaperLinkedList NewspaperLinkedList::searchByTitle(string t) {
 	return results;
 }
 
+//Searches the NewspaperLinkedList for newspapers with the given date
 NewspaperLinkedList NewspaperLinkedList::searchByDate(string d) {
 	NewspaperLinkedList results;
 	if (head == NULL) {
@@ -125,7 +148,8 @@ NewspaperLinkedList NewspaperLinkedList::searchByDate(string d) {
 	return results;
 }
 
-NewspaperLinkedList NewspaperLinkedList::serchByFrequency(string f) {
+//Searches the NewspaperLinkedList for newspapers with the given frequency
+NewspaperLinkedList NewspaperLinkedList::searchByFrequency(string f) {
 	NewspaperLinkedList results;
 	if (head == NULL) {
 		cout << "Error - there are no Newspapers to search";
@@ -144,6 +168,7 @@ NewspaperLinkedList NewspaperLinkedList::serchByFrequency(string f) {
 	return results;
 }
 
+//Searches the NewspaperLinkedList for newspapers with the given ISBN
 NewspaperLinkedList NewspaperLinkedList::searchByISBN(string isbn) {
 	NewspaperLinkedList results;
 	if (head == NULL) {
@@ -154,7 +179,7 @@ NewspaperLinkedList NewspaperLinkedList::searchByISBN(string isbn) {
 		Newspapers tempJ;
 		while (temp != NULL) {
 			Newspapers tempN = temp->data;
-			string ISBN = tempN.getISBN();
+			string ISBN = tempN.GetISBN();
 			if (ISBN.find(isbn) != string::npos) {
 				results.add(tempN);
 			}
@@ -164,6 +189,7 @@ NewspaperLinkedList NewspaperLinkedList::searchByISBN(string isbn) {
 	return results;
 }
 
+//Searches the NewspaperLinkedList for newspapers with the given price
 NewspaperLinkedList NewspaperLinkedList::searchByPrice(double p) {
 	NewspaperLinkedList results;
 	if (head == NULL) {
@@ -175,7 +201,7 @@ NewspaperLinkedList NewspaperLinkedList::searchByPrice(double p) {
 		string givenPrice = doubleToString(p);
 		while (temp != NULL) {
 			Newspapers tempN = temp->data;
-			double price = tempN.getPrice();
+			double price = tempN.GetPrice();
 			string strPrice = doubleToString(price);
 			if (strPrice.find(givenPrice) != string::npos) {
 				results.add(tempN);
@@ -184,23 +210,6 @@ NewspaperLinkedList NewspaperLinkedList::searchByPrice(double p) {
 		}
 	}
 	return results;
-}
-
-void NewspaperLinkedList::printAll() {
-	if (head == NULL) {
-		cout << "There are no newspapers to print" << endl;
-	}
-	else {
-		NewspaperNode* temp = head;
-		int counter = 1;
-		while (temp != NULL) {
-			Newspapers tempN = temp->data;
-			cout << " [" << counter << "] " << tempN.getTitle() << endl;
-			counter++;
-			temp = temp->next;
-		}
-		cout << endl;
-	}
 }
 
 //Returns the string value of a given double
@@ -214,3 +223,19 @@ string NewspaperLinkedList::doubleToString(double num) {
 
 //Returns the head of the linkedlist
 NewspaperNode* NewspaperLinkedList::getHead() { return head; }
+
+//Gets the size of the linkedlist
+int NewspaperLinkedList::getSize() {
+	if (head == NULL) {
+		return 0;
+	}
+	else {
+		NewspaperNode* temp = head;
+		int counter = 1;
+		while (temp != NULL) {
+			counter++;
+			temp = temp->next;
+		}
+		return counter;
+	}
+}

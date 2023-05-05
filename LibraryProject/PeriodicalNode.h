@@ -1,3 +1,4 @@
+//Made by Alanna Siebers
 #pragma once
 #ifndef PeriodicalNode_H
 #define PeriodicalNode_H

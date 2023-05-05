@@ -9,6 +9,7 @@ class NewspaperLinkedList {
 private:
 	NewspaperNode* head;
 	string doubleToString(double d);
+	int size = 0;
 public:
 	//Default Constructor
 	NewspaperLinkedList();
@@ -28,14 +29,14 @@ public:
 	//Search Functions
 	NewspaperLinkedList searchByTitle(string t);
 	NewspaperLinkedList searchByDate(string d);
-	NewspaperLinkedList serchByFrequency(string f);
+	NewspaperLinkedList searchByFrequency(string f);
 	NewspaperLinkedList searchByISBN(string ISBN);
 	NewspaperLinkedList searchByPrice(double p);
 
 	//Other Functions
 	void printAll();
 	NewspaperNode* getHead();
-
+	int getSize();
 };
 
 #endif;

@@ -1,9 +1,10 @@
+//Made by Alanna Siebers
 #include "UserLinkedList.h"
-#include <iostream>
-using namespace std;
-#include "User.h"
 #include "UserNode.h"
+#include "User.h"
+#include <iostream>
 #include <vector>
+using namespace std;
 
 //Returns the user with the given libraryID from the userLinkedList
 User UserLinkedList::getUser(int id) {
@@ -47,7 +48,8 @@ void UserLinkedList::addUser(User u) {
 	totalUsers++;
 }
 
-//Removes a user from the linked list
+//Removes a user from the UserLinkedList
+//assumes that all library IDs are unique to each user
 void UserLinkedList::removeUser(User u) {
 	if (head == NULL) {
 		cout << "No users to remove. " << endl;
@@ -56,7 +58,7 @@ void UserLinkedList::removeUser(User u) {
 		UserNode* currNode = head->next;
 		while (currNode != NULL) {
 			User currUser = currNode->data;
-			if (currUser.isEqual(u)) {
+			if (currUser.getLibraryID() == u.getLibraryID()) {
 				prevNode->next = currNode->next;
 				break;
 			}
@@ -88,7 +90,7 @@ User UserLinkedList::getUserAt(int index) {
 	}
 }
 
-//Prints all of the users in the linked list
+//Prints all of the users in the UserLinkedList
 void UserLinkedList::printAllUsers() {
 	cout << " All Users in the Library System" << endl;
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
@@ -118,13 +120,12 @@ void UserLinkedList::printUserAt(int index) {
 
 //A small function that runs in all search functions
 void UserLinkedList::searchBy(string str) {
-	cout << " Search results for " << str << endl;
+	cout << " Search results for \"" << str << "\"" << endl;
 	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 	if (head == NULL) { cout << "There are no users to search." << endl; }
 }
 
-//modify to list matches to first or last name first, then the other?
-//Searches the linked list for users with the given name
+//Searches the UserLinkedList for users with the given name
 UserLinkedList UserLinkedList::searchByName(string n) {
 	UserLinkedList results;
 	searchBy(n);
@@ -157,7 +158,7 @@ UserLinkedList UserLinkedList::searchByName(string n) {
 	return results;
 }
 
-//Searches the linked list for users with the given email
+//Searches the UserLinkedList for users with the given email
 UserLinkedList UserLinkedList::searchByEmail(string e) {
 	UserLinkedList results;
 	searchBy(e);
@@ -187,7 +188,7 @@ UserLinkedList UserLinkedList::searchByEmail(string e) {
 	return results;
 }
 
-//Searches the linked list for users with the given address
+//Searches the UserLinkedList for users with the given address
 UserLinkedList UserLinkedList::searchByAddress(string a) {
 	UserLinkedList results;
 	searchBy(a);
@@ -217,7 +218,7 @@ UserLinkedList UserLinkedList::searchByAddress(string a) {
 	return results;
 }
 
-//Searches the linked list for users with the given phone number
+//Searches the UserLinkedList for users with the given phone number
 UserLinkedList UserLinkedList::searchByPhoneNumber(string pn) {
 	UserLinkedList results;
 	searchBy(pn);
@@ -247,7 +248,7 @@ UserLinkedList UserLinkedList::searchByPhoneNumber(string pn) {
 	return results;
 }
 
-//Searches the linked list for users with the given keyword
+//Searches the UserLinkedList for users with the given keyword
 UserLinkedList UserLinkedList::searchByKeyword(string key) {
 	UserLinkedList results;
 	searchBy(key);
@@ -311,20 +312,6 @@ bool UserLinkedList::isValidLogin(int ID, string password) {
 	}
 }
 
-
-//Used to register new users in our library system
-//NEED TO MODIFY!!
-
-//DO NOT NEED
-/*
-User UserLinkedList::registerUser(string fn, string ln, string a, string pN, string e, string p, string instID, bool donor) {
-	int libID = generateLibraryID();
-	User u
-	addUser(u);
-	return u;
-}
-*/
-
 //Creates and returns a valid libraryID
 int UserLinkedList::generateLibraryID() {
 	int id, upperBound, lowerBound;
@@ -339,6 +326,7 @@ int UserLinkedList::generateLibraryID() {
 	return id;
 }
 
+//Checks if a given LibraryID matches the LibraryID of a user in the UserLinkedList
 bool UserLinkedList::isLibraryIDUsed(int id) {
 	if (head != NULL) {
 		UserNode* temp = head;

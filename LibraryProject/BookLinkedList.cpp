@@ -18,6 +18,7 @@ BookLinkedList::BookLinkedList(const BookLinkedList& books) {
 //Deconstructor
 BookLinkedList::~BookLinkedList() {}
 
+//Adds a given book to the linked list
 void BookLinkedList::addBook(Books b) {
 	size++;
 	BookNode* newnode = new BookNode();
@@ -37,6 +38,7 @@ void BookLinkedList::addBook(Books b) {
 	}
 }
 
+//Remove a book from the linked list based on the given ISBN
 void BookLinkedList::remove(string ISBN) {
 	
 	if (head == NULL) {
@@ -58,7 +60,10 @@ void BookLinkedList::remove(string ISBN) {
 	}
 }
 
+//Get the book in the linked list which has the same ISBN as the given ISBN
 Books BookLinkedList::get(string ISBN) {
+	Books b;
+	b.SetTitle("no match");
 	if (head != NULL) {
 		BookNode* temp = head;
 		Books tempB;
@@ -69,9 +74,12 @@ Books BookLinkedList::get(string ISBN) {
 			}
 			temp = temp->next;
 		}
+		return b;
 	}
+	return b;
 }
 
+//Get the book in the linked list at the given index
 Books BookLinkedList::getAt(int index) {
 	if (head != NULL) {
 		BookNode* temp = head;
@@ -87,6 +95,7 @@ Books BookLinkedList::getAt(int index) {
 	}
 }
 
+//Print all of the books in the linked list
 void BookLinkedList::printAllBooks() {
 	if (head == NULL) {
 		cout << "Error - there are no books to print." << endl;
@@ -104,6 +113,7 @@ void BookLinkedList::printAllBooks() {
 	}
 }
 
+//Searches the linked list for books with the given price
 BookLinkedList BookLinkedList::searchByPrice(double p) {
 	BookLinkedList results;
 	if (head == NULL) {
@@ -126,6 +136,7 @@ BookLinkedList BookLinkedList::searchByPrice(double p) {
 	return results;
 }
 
+//Searches the linked list for books with the given title
 BookLinkedList BookLinkedList::searchByTitle(string t) {
 	BookLinkedList results;
 	if (head == NULL) {
@@ -146,6 +157,7 @@ BookLinkedList BookLinkedList::searchByTitle(string t) {
 	return results;
 }
 
+//Searches the linked list for books with the given ISBN
 BookLinkedList BookLinkedList::searchByISBN(string isbn) {
 	BookLinkedList results;
 	if (head == NULL) {
@@ -166,6 +178,7 @@ BookLinkedList BookLinkedList::searchByISBN(string isbn) {
 	return results;
 }
 
+//Searches the linked list for books with the given Author
 BookLinkedList BookLinkedList::searchByAuthor(string a) {
 	BookLinkedList results;
 	if (head == NULL) {
@@ -186,6 +199,7 @@ BookLinkedList BookLinkedList::searchByAuthor(string a) {
 	return results;
 }
 
+//Searches the linked list for books with the given publisher name
 BookLinkedList BookLinkedList::searchByPublisherName(string pName) {
 	BookLinkedList results;
 	if (head == NULL) {
@@ -205,6 +219,7 @@ BookLinkedList BookLinkedList::searchByPublisherName(string pName) {
 	}
 }
 
+//Searches the linked list for books with the given genre
 BookLinkedList BookLinkedList::searchByGenre(string g) {
 	BookLinkedList results;
 	if (head == NULL) {
@@ -223,6 +238,36 @@ BookLinkedList BookLinkedList::searchByGenre(string g) {
 		}
 	}
 	return results;
+}
+
+//Searches the linked list for books with the given keyword
+BookLinkedList BookLinkedList::searchByKeyword(string key) {
+	BookLinkedList results;
+	if (head != NULL) {
+		BookNode* temp = head;
+		Books tempB;
+		while (temp != NULL) {
+			
+			//Getting all of the relevant data values from the current node
+			string title = tempB.GetTitle();
+			string ISBN = tempB.GetISBN();
+			string pubName = tempB.GetPublisher().getPublisherName();
+			string author = tempB.GetAuthor();
+			string genre = tempB.GetGenre();
+
+			//Check if any of the data values have the key
+			bool keyInTitle = (title.find(key) != string::npos);
+			bool keyInISBN = (ISBN.find(key) != string::npos);
+			bool keyInPubName = (pubName.find(key) != string::npos);
+			bool keyInAuthor = (author.find(key) != string::npos);
+			bool keyInGenre = (genre.find(key) != string::npos);
+
+			if (keyInTitle || keyInISBN || keyInPubName || keyInAuthor || keyInGenre) {
+				results.addBook(tempB);
+			}
+			temp = temp->next;
+		}
+	}
 }
 
 //Returns the string value of a given double

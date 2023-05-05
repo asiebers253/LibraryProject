@@ -1,2 +1,5 @@
 Maria Hoey,Animal Stories,Family,1,978-1-60309-502-0,19.99,Chancy,email@email.com,1234 a place lane
 Maria Hoey,Animal Fables,Family,1,978-1-60409-502-0,19.99,Chancy,email@email.com,1234 a place lane
+Chevy Heald,Payback,Action|Thriller,3,650179836-1,8.57,Rutherford MacIlhargy,rmacilhargy0@soundcloud.com,58036 Fulton Way
+Ingamar McCaughran,Indiana Jones and the Temple of Doom,Action|Adventure|Fantasy,3,650666042-2,19.99,Rafael Allibon,rallibon1@elegantthemes.com,48926 Dwight Drive
+Lyssa Sambidge,Last Chance Harvey,Drama|Romance,1,655408756-7,1.33,Mendel Jovicevic,mjovicevic2@globo.com,2479 Westport Point

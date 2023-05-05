@@ -11,58 +11,58 @@
 
 class Menus {
 private:
+	//All of the linkedlists used in the program
 	UserLinkedList users;
 	BookLinkedList books;
 	JournalLinkedList journals;
 	NewspaperLinkedList newspapers;
 	PeriodicalLinkedList periodicals;
-	PublisherLinkedList publishers;
 
-	void bookSearchResults(BookLinkedList results, int num, User &u);
-
-	void userView(Books b, User& u);
-	void userViewOptions(Books b, User& u);
-
+	//Starting Menu
 	void main();
 
-	//Get various types of input
-	int getInput();
-	int getInt(string question);
-	string getString(string question);
-	
-	//Other
-	void menuName(string name);
-	void printOptions(vector<string> options);
-	int strToInt(string str);
-	void setupMain();
-	void guestViewPurchase(int quantity);
-	
-	//Functions accessed by the main function
+	//Login-Related Functions
 	void login();
-	//void createUser();
-
-	//Functions used by the createUser function
-	void printCheckInfo(string fn, string ln, string a, string pN, string e, string p, int id, bool donor, string type);
-
-	//Functions access by the login function
-	//void standardUserMenu();
-	//void adminMenu();
-
+	void standardMain(User u);
 	void adminMain(User u);
+
+	//Function for Users to Look at Their Borrowed Books
+	void viewBorrowedBooks(User &u);
+
+	//Function to Create a New User
+	void createUser();
+
+	//Search Inventory
+	void searchInventory(int num);
+
+	//Search Books
+	void searchBooksGuest();
+	void lookAtBookSearchResultsGuest(BookLinkedList results);
+	void viewBookGuest(Books b);
+
+	//Search Newspapers
+	void searchNewspapers(int num);
+	void lookAtNewspaperSearchResults(NewspaperLinkedList results, int num);
+	void viewNewspaperGuest(Newspapers n);
+
+	//Search Users
 	void searchUsers();
 	void lookAtUserSearchResults(UserLinkedList results);
 	void viewUser(User u);
-	void standardMain(User u);
-	
-	void guestView(Books b);
-	void guestView(Journals j);
-	void guestView(Periodicals p);
-	void guestView(Newspapers n);
 
-	//void searchBooks();
-	//void searchBooksAdmin();
+	//Other Functions
+	void menuName(string name);
+	void printOptions(vector<string> options);
+	int getInput();
+	string getString(string question);
+	int getInt(string question);
+	string intToStr(int num);
+	int strToInt(string str);
+	double strToDouble(string str);
+	void printCheckInfo(string fn, string ln, string a, string pN, string e, string p, string id, bool donor);
 
 public: 
+	//Default Constructor
 	Menus();
 };
 

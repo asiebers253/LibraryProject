@@ -7,7 +7,7 @@
 using namespace std;
 
 //Default Constructor
-//JournalLinkedList::JournalLinkedList() { head = NULL; }
+JournalLinkedList::JournalLinkedList() { head = NULL; }
 
 //Copy Constructor
 JournalLinkedList::JournalLinkedList(const JournalLinkedList& journals) : head(journals.head) {};
@@ -52,6 +52,7 @@ void JournalLinkedList::removeJournal(string ISBN) {
 		}
 	}
 }
+
 //Returns a journal from the JournalLinkedList based on the given ISBN
 Journals JournalLinkedList::getJournal(string ISBN) {
 	if (head != NULL) {
@@ -104,9 +105,7 @@ void JournalLinkedList::printAllJournals() {
 	}
 }
 
-
-
-//Returns a JournalLinkedList containing journals with any connection to the given author
+//Search the linked list for journals with the given author
 JournalLinkedList JournalLinkedList::searchByAuthor(string a) {
 	JournalLinkedList results;
 	if (head == NULL) {
@@ -127,7 +126,7 @@ JournalLinkedList JournalLinkedList::searchByAuthor(string a) {
 	return results;
 }
 
-//Returns a JournalLinkedList containing journals with any connection to the given title
+//Search the linked list for journals with the given title
 JournalLinkedList JournalLinkedList::searchByTitle(string t) {
 	JournalLinkedList results;
 	if (head == NULL) {
@@ -148,7 +147,7 @@ JournalLinkedList JournalLinkedList::searchByTitle(string t) {
 	return results;
 }
 
-//Returns a JournalLinkedList containing journals with any connection to the given ISBN
+//Search the linked list for journals with the given ISBN
 JournalLinkedList JournalLinkedList::searchByISBN(string isbn) {
 	JournalLinkedList results;
 	if (head == NULL) {
@@ -169,7 +168,7 @@ JournalLinkedList JournalLinkedList::searchByISBN(string isbn) {
 	return results;
 }
 
-//Returns a JournalLinkedList containing journals with any connection to the given price
+//Search the linked list for journals with the given price
 JournalLinkedList JournalLinkedList::searchByPrice(double p) {
 	JournalLinkedList results;
 	if (head == NULL) {
@@ -191,8 +190,6 @@ JournalLinkedList JournalLinkedList::searchByPrice(double p) {
 	}
 	return results;
 }
-
-
 
 //Returns the string value of a given double
 string JournalLinkedList::doubleToString(double num) {

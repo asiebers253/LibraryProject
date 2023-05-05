@@ -11,9 +11,7 @@ private:
 	string doubleToString(double num);
 public:
 	//Default Constructor
-	JournalLinkedList() {
-		head = NULL;
-	}
+	JournalLinkedList();
 
 	//Copy Constructor
 	JournalLinkedList(const JournalLinkedList& journals);

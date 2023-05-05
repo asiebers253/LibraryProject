@@ -43,7 +43,7 @@ void PeriodicalLinkedList::removePeriodical(string ISBN) {
 		PeriodicalNode* currNode = head->next;
 		while (currNode != NULL) {
 			Periodicals currPeriodical = currNode->data;
-			if (ISBN == currPeriodical.getISBN()) {
+			if (ISBN == currPeriodical.GetISBN()) {
 				prevNode->next = currNode->next;
 				break;
 			}
@@ -52,6 +52,7 @@ void PeriodicalLinkedList::removePeriodical(string ISBN) {
 		}
 	}
 }
+
 //Returns a periodical from the PeriodicalLinkedList based on the given ISBN
 Periodicals PeriodicalLinkedList::getPeriodical(string ISBN) {
 	if (head != NULL) {
@@ -59,7 +60,7 @@ Periodicals PeriodicalLinkedList::getPeriodical(string ISBN) {
 		Periodicals tempP;
 		while (temp != NULL) {
 			tempP = temp->data;
-			if (ISBN == tempP.getISBN()) {
+			if (ISBN == tempP.GetISBN()) {
 				return tempP;
 			}
 			temp = temp->next;
@@ -96,7 +97,7 @@ void PeriodicalLinkedList::printAllPeriodicals() {
 		int counter = 1;
 		while (temp != NULL) {
 			Periodicals tempP = temp->data;
-			cout << " [" << counter << "] " << tempP.getTitle() << endl;
+			cout << " [" << counter << "] " << tempP.GetTitle() << endl;
 			counter++;
 			temp = temp->next;
 		}
@@ -104,12 +105,7 @@ void PeriodicalLinkedList::printAllPeriodicals() {
 	}
 }
 
-
-//search by title, data, frequency, ISBN, and price
-
-
-
-//Returns a PeriodicalLinkedList containing periodicals with any connection to the given price
+//Searches the PeriodicalLinekdList for periodicals with the given price
 PeriodicalLinkedList PeriodicalLinkedList::searchByPrice(double p) {
 	PeriodicalLinkedList results;
 	if (head == NULL) {
@@ -121,7 +117,7 @@ PeriodicalLinkedList PeriodicalLinkedList::searchByPrice(double p) {
 		string givenPrice = doubleToString(p);
 		while (temp != NULL) {
 			tempP = temp->data;
-			double price = tempP.getPrice();
+			double price = tempP.GetPrice();
 			string strPrice = doubleToString(price);
 			if (strPrice.find(givenPrice) != string::npos) {
 				results.addPeriodical(tempP);
@@ -132,6 +128,7 @@ PeriodicalLinkedList PeriodicalLinkedList::searchByPrice(double p) {
 	return results;
 }
 
+//Searches the PeriodicalinkedList for periodicals with the given title
 PeriodicalLinkedList PeriodicalLinkedList::searchByTitle(string t) {
 	PeriodicalLinkedList results;
 	if (head == NULL) {
@@ -142,7 +139,7 @@ PeriodicalLinkedList PeriodicalLinkedList::searchByTitle(string t) {
 		Periodicals tempP;
 		while (temp != NULL) {
 			tempP = temp->data;
-			string title = tempP.getTitle();
+			string title = tempP.GetTitle();
 			if (title.find(t) != string::npos) {
 				results.addPeriodical(tempP);
 			}
@@ -152,6 +149,7 @@ PeriodicalLinkedList PeriodicalLinkedList::searchByTitle(string t) {
 	return results;
 }
 
+//Searches the PeriodicalinkedList for periodicals with the given date
 PeriodicalLinkedList PeriodicalLinkedList::searchByDate(string d) {
 	PeriodicalLinkedList results;
 	if (head == NULL) {
@@ -172,6 +170,7 @@ PeriodicalLinkedList PeriodicalLinkedList::searchByDate(string d) {
 	return results;
 }
 
+//Searches the PeriodicalinkedList for periodicals with the given ISBN
 PeriodicalLinkedList PeriodicalLinkedList::searchByISBN(string isbn) {
 	PeriodicalLinkedList results;
 	if (head == NULL) {
@@ -182,7 +181,7 @@ PeriodicalLinkedList PeriodicalLinkedList::searchByISBN(string isbn) {
 		Periodicals tempP;
 		while (temp != NULL) {
 			tempP = temp->data;
-			string ISBN = tempP.getISBN();
+			string ISBN = tempP.GetISBN();
 			if (ISBN.find(isbn) != string::npos) {
 				results.addPeriodical(tempP);
 			}
@@ -192,6 +191,7 @@ PeriodicalLinkedList PeriodicalLinkedList::searchByISBN(string isbn) {
 	return results;
 }
 
+//Searches the PeriodicalinkedList for periodicals with the given frequency
 PeriodicalLinkedList PeriodicalLinkedList::searchByFrequency(string f) {
 	PeriodicalLinkedList results;
 	if (head == NULL) {

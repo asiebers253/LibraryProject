@@ -2,7 +2,6 @@
 #pragma once
 #ifndef NewspaperNode_H
 #define NewspaperNode_H
-
 #include "Newspapers.h"
 
 class NewspaperNode

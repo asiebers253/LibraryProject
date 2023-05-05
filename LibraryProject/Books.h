@@ -4,6 +4,7 @@
 #define books_h
 #include "Inventory.h"
 #include <string>
+#include <iomanip>
 using namespace std;
 
 class Books : public Inventory {
@@ -11,58 +12,34 @@ private:
 	string author;
 	int edition;
 	string genre;
-	string ISBN;
-	double price;
 public:
+	//Default Constructor
+	Books() {};
 
-	Books();
+	//Parametric Constructor
+	Books(string author, string title, int edition, string genre, string ISBN, double price, Publisher p)
+		: author(author), edition(edition), genre(genre), Inventory(p, title, ISBN, price) {};
 
-	Books(string author, string title, int edition, string genre, string ISBN, double price, Publisher p);
+	//Deconstructor
+	~Books() {};
 
-	~Books();
-
-	string GetAuthor();
-
-	void SetAuthor(string a);
-
-	string GetTitle();
-
-	void SetTitle(string t);
-
-	string GetPublisherEmail() { return publisher.getPublisherEmail(); }
-
-	void SetPublisherEmail(string pe) {
-		publisher.setPublisherEmail(pe);
-	}
-
-	string GetPublisherAddress() {
-		return publisher.getPublisherAddress();
-	}
-
-	void SetPublisherAddress(string pa) {
-		publisher.setPublisherAddress(pa);
-	}
-
-	string GetISBN();
-
-	void SetISBN(string i);
-
-	int GetEdition();
-
-	void SetEdition(int e);
-
-	double GetPrice();
-
-	void SetPrice(double pr);
-
+	//Getters and Setters
+	void SetAuthor(string a) { author = a; };
+	string GetAuthor() { return author; };
+	void SetEdition(int e) { edition = e; };
+	int GetEdition() { return edition; };
 	string GetGenre() { return genre; };
 	void SetGenre(string g) { genre = g; };
 
-	Publisher GetPublisher() { return publisher; };
-	void SetPublisher(Publisher p) { publisher = p; }
-
-	void print();
-
+	//Prints out all of the relevant book information
+	void print() {
+		cout << " Book Information - " << title << endl;
+		cout << setw(40) << setfill('~') << "" << setfill(' ') << endl;
+		cout << " Author: " << author << endl;
+		cout << " Edition: " << edition << endl;
+		cout << " Genre: " << genre << endl;
+		Inventory::print();
+	}
 };
 
 #endif

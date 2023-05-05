@@ -33,6 +33,7 @@ public:
 	BookLinkedList searchByISBN(string ISBN);
 	BookLinkedList searchByPrice(double price);
 	BookLinkedList searchByGenre(string g);
+	BookLinkedList searchByKeyword(string k);
 
 	//Other Functions
 	void printAllBooks();

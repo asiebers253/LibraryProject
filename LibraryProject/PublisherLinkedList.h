@@ -4,15 +4,15 @@
 #define PublisherLinekdList_H
 #include "PublisherNode.h"
 #include "Publisher.h"
+//This class was intended to be used to keep tract of all of the publishers
+//This class is currently not being used
 
 class PublisherLinkedList {
 private:
 	PublisherNode* head;
 public:
 	//Default Constructor
-	PublisherLinkedList() {
-		head = NULL;
-	};
+	PublisherLinkedList() { head = NULL; };
 
 	//Copy Constructor
 	PublisherLinkedList(const PublisherLinkedList& publishers);
@@ -20,9 +20,8 @@ public:
 	//Destructor
 	~PublisherLinkedList();
 
-	//Add and Get Functions
+	//Add and Find Functions
 	void addPublisher(Publisher p);
-	Publisher getPublisherByID(string id);
 	bool find(Publisher p);
 };
 

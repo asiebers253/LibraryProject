@@ -2,7 +2,6 @@
 #pragma once
 #ifndef UserLinkedList_H
 #define UserLinkedList_H
-
 #include <iostream>
 #include "UserNode.h"
 #include "User.h"
@@ -17,30 +16,28 @@ public:
 	UserLinkedList() { head = NULL; }
 	~UserLinkedList() {}
 
-	//Finding and Modifying Users
-	User registerUser(string, string, string, string, string, string, string, bool);
+	//Add, Remove, and Get Functions
 	void addUser(User u);
 	void removeUser(User u);
 	User getUserAt(int index);
 	User getUser(int instID);
 
-	//Print functions
+	//Print Functions
 	void printUserAt(int index);
 	void printAllUsers();
 
-	//Search functions
+	//Search Functions
 	UserLinkedList searchByName(string n);
 	UserLinkedList searchByAddress(string a);
 	UserLinkedList searchByEmail(string e);
 	UserLinkedList searchByPhoneNumber(string pn);
 	UserLinkedList searchByKeyword(string key);
 
-	//Other
+	//Other Functions
 	bool isValidLogin(int, string);
 	int generateLibraryID();
 	bool isLibraryIDUsed(int);
 	UserNode* getHead() { return head;}
-	//void test();
 	int getTotalUsers() { return totalUsers; }
 };
 

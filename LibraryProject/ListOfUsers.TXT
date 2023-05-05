@@ -1,5 +1,3 @@
-Abby,Stout,1414 Someplace Lane,920-123-4567,stoua98@uwgb.edu,password,S7654321,12,Yes
-Abster,Stout,1414 Someplace Lane,920-123-4567,stoua98@uwgb.edu,passWORD,E2121212,12,Yes
-Brent,Stout,1414 Someplace Lane,920-123-4567,stoua98@uwgb.edu,password,S7654312,12,Yes
-Rebecca,Stout,1414 Someplace Lane,920-123-4567,stoua98@uwgb.edu,password,E7654323,12,Yes
-John,Adams,Swamplands,920-093-1093,johna@uwgb.edu,password,S0030511,12,Yes
+Abby,Stout,1414 Someplace Lane,920-123-4567,stoua98@uwgb.edu,password,S7654321,12333,Yes
+Abster,Stout,1414 Someplace Lane,920-123-4567,stoua98@uwgb.edu,passWORD,E2121212,12444,Yes
+John,Adams,Swamplands,920-093-1093,johna@uwgb.edu,password,S0030511,12345,Yes

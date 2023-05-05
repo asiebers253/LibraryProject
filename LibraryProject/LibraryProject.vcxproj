@@ -128,17 +128,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BookLinkedList.cpp" />
-    <ClCompile Include="Books.cpp" />
-    <ClCompile Include="BorrowedBook!.cpp" />
-    <ClCompile Include="BorrowedBook.cpp" />
-    <ClCompile Include="Employee.cpp" />
     <ClCompile Include="JournalLinkedList.cpp" />
     <ClCompile Include="Menus.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="NewspaperLinkedList.cpp" />
     <ClCompile Include="PeriodicalLinkedList.cpp" />
     <ClCompile Include="PublisherLinkedList.cpp" />
-    <ClCompile Include="Student.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="ManageFiles.cpp" />
     <ClCompile Include="UserLinkedList.cpp" />
@@ -147,7 +142,6 @@
     <ClInclude Include="BookLinkedList.h" />
     <ClInclude Include="Books.h" />
     <ClInclude Include="BookNode.h" />
-    <ClInclude Include="BorrowedBook!.h" />
     <ClInclude Include="BorrowedBook.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="Inventory.h" />

@@ -4,7 +4,7 @@
 #include "Publisher.h"
 
 //Default Constructor
-//PublisherLinkedList::PublisherLinkedList() { head == NULL; };
+PublisherLinkedList::PublisherLinkedList() { head == NULL; };
 
 //Copy Constructor
 PublisherLinkedList::PublisherLinkedList(const PublisherLinkedList& publishers) : head(publishers.head) {}
@@ -29,6 +29,7 @@ void PublisherLinkedList::addPublisher(Publisher p) {
 	}
 }
 
+/*
 Publisher PublisherLinkedList::getPublisherByID(string id) {
 	Publisher p;
 	if (head != NULL) {
@@ -44,7 +45,7 @@ Publisher PublisherLinkedList::getPublisherByID(string id) {
 		}
 	}
 	return p;
-}
+}*/
 
 bool PublisherLinkedList::find(Publisher p) {
 	bool result = false;
