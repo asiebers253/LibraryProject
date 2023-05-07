@@ -31,8 +31,8 @@ public:
 	void print() {
 		cout << "Newspaper Information - " << title << endl;
 		cout << setw(40) << setfill('~') << "" << setfill(' ') << endl;
-		cout << "Date: " << date << endl;
-		cout << "Frequency: " << frequency << endl;
+		cout << " Date: " << date << endl;
+		cout << " Frequency: " << frequency << endl;
 		Inventory::print();
 	}
 };

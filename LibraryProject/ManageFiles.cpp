@@ -72,10 +72,11 @@ BookLinkedList ManageFiles::readBooksFile() {
 		if (currPos != -1) {
 			//Get all of the information about the specific book from the file
 			author = info.substr(0, currPos);
-			while (count < 8) {
+			while (count < 10) {
 				prevPos = currPos;
 				currPos = info.find(",", prevPos + 1);
 				string chunkOfInfo = info.substr(prevPos + 1, currPos - (prevPos + 1));
+				
 
 				switch (count) {
 					
@@ -87,6 +88,7 @@ BookLinkedList ManageFiles::readBooksFile() {
 					break;
 				case 4:
 					edition = strToInt(chunkOfInfo);
+					
 					break;
 				case 5:
 					ISBN = chunkOfInfo;
@@ -568,7 +570,7 @@ void ManageFiles::saveBookFile(BookLinkedList books) {
 			output = tempB.GetAuthor() + ",";
 			output += tempB.GetTitle() + ",";
 			output += tempB.GetGenre() + ",";
-			output += tempB.GetEdition() + ",";
+			output += intToStr(tempB.GetEdition()) + ",";
 			output += tempB.GetISBN() + ",";
 			output += doubleToStr(tempB.GetPrice()) + ",";
 			output += p.getPublisherName() + ",";

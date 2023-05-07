@@ -12,7 +12,7 @@ private:
 	PublisherNode* head;
 public:
 	//Default Constructor
-	PublisherLinkedList() { head = NULL; };
+	PublisherLinkedList();
 
 	//Copy Constructor
 	PublisherLinkedList(const PublisherLinkedList& publishers);

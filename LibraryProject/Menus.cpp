@@ -42,7 +42,7 @@ void Menus::main() {
 			break;
 		default:
 			//The user input an invalid option
-			cout << "Please enter a valid option." << endl;
+			cout << " Please enter a valid option" << endl;
 			choice = getInput();
 			break;
 		}
@@ -55,7 +55,8 @@ void Menus::main() {
 		}
 	}
 	//If the user input a -1, exit the program
-	cout << "Thank you for using the Cofrin Library System!";
+	cout << endl;
+	cout << " Thank you for using the Cofrin Library System!";
 	cout << endl;
 }
 
@@ -137,7 +138,7 @@ void Menus::standardMain(User u) {
 			break;
 		default:
 			//User gave an invalid input
-			cout << "Please choose one of the previously mentioned options" << endl;
+			cout << " Please choose one of the previously mentioned options" << endl;
 			choice = getInput();
 			break;
 		}
@@ -160,7 +161,7 @@ void Menus::adminMain(User u) {
 	printOptions(options);
 	int choice = getInput();
 	while (choice == 0) {
-		cout << "please chose a valid option" << endl;
+		cout << " Please chose a valid option" << endl;
 		choice = getInput();
 	}
 	if (choice == -1) {
@@ -187,7 +188,7 @@ void Menus::adminMain(User u) {
 		printOptions(options);
 		choice = getInput();
 		while (choice == 0) {
-			cout << "please chose a valid option" << endl;
+			cout << "Please chose a valid option" << endl;
 			choice = getInput();
 		}
 		if (choice == -1) { return; }
@@ -334,10 +335,10 @@ void Menus::createUser() {
 
 			//Thank the user for making an account and send them back to the main menu
 			cout << endl;
-			cout << "Thank you for making an account!" << endl;
-			cout << "Please remember the following information in order to login" << endl;
-			cout << "Username: " << username << endl;
-			cout << "Password: " << password << endl;
+			cout << " Thank you for making an account!" << endl;
+			cout << " Please remember the following information in order to login" << endl;
+			cout << " Username: " << username << endl;
+			cout << " Password: " << password << endl;
 			return;
 		case 2:
 			//The user wants to change something with their information
@@ -402,14 +403,14 @@ void Menus::createUser() {
 
 				default:
 					//The user input an invalid option
-					cout << "Please enter a valid option." << endl;
+					cout << " Please enter a valid option" << endl;
 					innerChoice = getInput();
 					break;
 				}
 
 				//If returning from making a change, reprint the change menu
 				if (innerChoice >= 1 && innerChoice <= 8) {
-					cout << "Is there anything else you would like to change?" << endl;
+					cout << " Is there anything else you would like to change?" << endl;
 					printOptions(changeOptions);
 					innerChoice = getInput();
 				}
@@ -450,7 +451,7 @@ void Menus::searchInventory(int num) {
 			break;
 		default:
 			//The user input an invalid option
-			cout << "Please enter a valid option." << endl;
+			cout << " Please enter a valid option." << endl;
 			choice = getInput();
 			break;
 		}
@@ -460,7 +461,7 @@ void Menus::searchInventory(int num) {
 			cout << " Which would you like to search?" << endl;
 			vector<string> options{ "Search Books", "Search Newspapers", "Exit" };
 			printOptions(options);
-			int choice = getInput();
+			choice = getInput();
 			if (choice == -1) {
 				return;
 			}
@@ -478,7 +479,7 @@ void Menus::searchBooksGuest() {
 	if (input == "-1") {
 		return;
 	};
-	cout << "What would you like to search by?" << endl;
+	cout << " What would you like to search by?" << endl;
 	vector<string> options{ "Search by Title", "Search by Author", "Search by Genre", "Exit" };
 	printOptions(options);
 	int choice = getInput();
@@ -507,7 +508,7 @@ void Menus::searchBooksGuest() {
 			if (input == "-1") {
 				return;
 			};
-			cout << "What would you like to search by?" << endl;
+			cout << " What would you like to search by?" << endl;
 			vector<string> options{ "Search by Title", "Search by Author", "Exit" };
 			printOptions(options);
 			choice = getInput();
@@ -517,13 +518,13 @@ void Menus::searchBooksGuest() {
 
 void Menus::lookAtBookSearchResultsGuest(BookLinkedList results) {
 	if (results.getHead() == NULL) {
-		cout << "There are no books that match your search" << endl;
+		cout << " There are no books that match your search" << endl;
 		return;
 	}
 
 	menuName("Search Results");
 	results.printAllBooks();
-	cout << "Which book would you like to look at?" << endl;
+	cout << " Which book would you like to look at?" << endl;
 	int choice = getInput();
 
 	if (choice == -1) {
@@ -531,7 +532,7 @@ void Menus::lookAtBookSearchResultsGuest(BookLinkedList results) {
 	}
 
 	while (choice == 0 || choice < -1 || choice > results.getSize()) {
-		cout << "please chose a valid option" << endl;
+		cout << " Please chose a valid option" << endl;
 		choice = getInput();
 	}
 	if (choice >= 1 && choice <= results.getSize()) {
@@ -552,8 +553,8 @@ void Menus::viewBookGuest(Books b) {
 	}
 	if (choice == 1) {
 		cout << endl;
-		cout << "You have purchased this product!" << endl;
-		cout << "Thank you for supporting the Cofrin Library!" << endl;
+		cout << " You have purchased this product!" << endl;
+		cout << " Thank you for supporting the Cofrin Library!" << endl;
 	}
 }
 
@@ -564,7 +565,7 @@ void Menus::viewBookGuest(Books b) {
 void Menus::searchNewspapers(int num) {
 	NewspaperLinkedList results;
 	menuName("Search Newspapers");
-	string input = getString("What would you like to search?");
+	string input = getString(" What would you like to search?");
 	if (input.find("-1") != string::npos) {
 		return;
 	}
@@ -594,6 +595,7 @@ void Menus::searchNewspapers(int num) {
 
 		if (choice > 0 && choice <= 4) {
 			//look at search results
+			cout << endl;
 			lookAtNewspaperSearchResults(results, num);
 
 			//reprint the menu
@@ -602,7 +604,7 @@ void Menus::searchNewspapers(int num) {
 			if (input == "-1") {
 				return;
 			}
-			cout << "What would you like to search by?" << endl;
+			cout << " What would you like to search by?" << endl;
 			vector<string> options{ "Search by Title", "Search by Frequency", "Search by ISBN", "Exit" };
 			printOptions(options);
 			int choice = getInput();
@@ -616,20 +618,20 @@ void Menus::searchNewspapers(int num) {
 //Look at the search results for a search of newspapers
 void Menus::lookAtNewspaperSearchResults(NewspaperLinkedList results, int num) {
 	if (results.getHead() == NULL) {
-		cout << "There are no newspapers that match your search" << endl;
+		cout << " There are no newspapers that match your search" << endl;
 		return;
 	}
 
 	menuName("Search Results");
 	results.printAll();
-	cout << "Which Newspaper would you like to look at?" << endl;
+	cout << " Which Newspaper would you like to look at?" << endl;
 	int choice = getInput();
 	if (choice == -1) {
 		return;
 	}
 
 	while (choice == 0 || choice < -1 || choice > results.getSize()) {
-		cout << "please chose a valid option" << endl;
+		cout << " Please chose a valid option" << endl;
 		choice = getInput();
 	}
 	if (choice >= 1 && choice <= results.getSize()) {
@@ -647,17 +649,18 @@ void Menus::lookAtNewspaperSearchResults(NewspaperLinkedList results, int num) {
 
 //Displays information on a specific newspaper and the user's options for it
 void Menus::viewNewspaperGuest(Newspapers n) {
+	cout << endl;
 	n.print();
 	vector<string> options{ "Purchase One", "Exit" };
 	printOptions(options);
 	int choice = getInput();
 	while (choice != -1 && choice != 1) {
-		cout << "Please enter a valid option." << endl;
+		cout << " Please enter a valid option." << endl;
 		choice = getInput();
 	}
 	if (choice == 1) {
-		cout << "You have purchased this product!" << endl;
-		cout << "Thank you for supporting the Cofrin Library!" << endl;
+		cout << " You have purchased this product!" << endl;
+		cout << " Thank you for supporting the Cofrin Library!" << endl;
 	}
 }
 
@@ -714,10 +717,10 @@ void Menus::searchUsers() {
 
 //Look at the search results for a search of users
 void Menus::lookAtUserSearchResults(UserLinkedList results) {
-	cout << "Which user would you like to look at?" << endl;
+	cout << " Which user would you like to look at?" << endl;
 	int choice = getInput();
 	while (choice == 0 || choice > results.getTotalUsers()) {
-		cout << "please chose a valid option" << endl;
+		cout << " Please chose a valid option" << endl;
 		choice = getInput();
 	}
 	if (choice == -1) {
